@@ -24,7 +24,7 @@
               <li><a class="dropdown-item" href="?filter=order_value">Theo giá trị đơn hàng</a></li>
             </ul>
             <!-- Nút đi đến trang vocher -->
-            <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary btn-sm px-3 me-2"
+            <a href="{{ route('admin.orders') }}" class="btn btn-secondary btn-sm px-3 me-2"
               style="border-radius: 5px; font-size: 17px;">
               <i class="fas fa-eye"></i> Quay lại
             </a>

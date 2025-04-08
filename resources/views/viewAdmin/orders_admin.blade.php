@@ -17,11 +17,11 @@
             </div>
             <div class="Diao">
                 <!-- Nút đi đến trang vocher -->
-                <a href="{{ route('customer.list') }}" class="btn btn-secondary btn-sm px-3 me-2"
+                <a href="{{ route('admin.customers') }}" class="btn btn-secondary btn-sm px-3 me-2"
                     style="border-radius: 5px; font-size: 14px;">
                     <i class="fas fa-eye"></i> Danh sách khách hàng
                 </a>
-                <a href="{{ route('returns.orders.index') }}" class="btn btn-secondary btn-sm px-3 me-2"
+                <a href="{{  route('admin.returns_orders') }}" class="btn btn-secondary btn-sm px-3 me-2"
                     style="border-radius: 5px; font-size: 14px;">
                     <i class="fas fa-eye"></i> Danh sách đơn hàng đổi trả
                 </a>

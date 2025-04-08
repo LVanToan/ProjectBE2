@@ -1,5 +1,5 @@
 @extends('viewAdmin.navigation')
-@section('title', 'Order Manager')
+@section('title', 'List Return Order')
 @section('content')
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -9,22 +9,22 @@
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">Returns Orders manager</h6>
+                    <h6 class="text-white text-capitalize ps-3">Returns Orders Manager</h6>
                 </div>
             </div>
             <div class="row p-3">
                 <!-- Thanh tìm kiếm -->
             </div>
             <div class="Diao">
-                <!-- Nút đi đến trang vocher -->
-                <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary btn-sm px-3 me-2"
+                <!-- Nút đi đến trang khác -->
+                <a href="{{ route('admin.orders') }}" class="btn btn-secondary btn-sm px-3 me-2"
                     style="border-radius: 5px; font-size: 14px;">
                     <i class="fas fa-eye"></i> Quay lại
                 </a>
             </div>
         </div>
-        <div class="returns_order_manager">
-            <table class="table table-bordered">
+        <div class="orders_manager">
+            <table>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -36,10 +36,10 @@
                         <th>Ngày đổi trả</th>
                         <th>Số điện thoại</th>
                         <th>Trạng thái</th>
-                        <th></th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="returns_orders_manager">
                     @foreach($returnsOrders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
@@ -53,10 +53,9 @@
                             <td>{{ $order->status }}</td>
                             <td>
                                 @if ($order->status === 'Đã gửi sản phẩm')
-                                    <a href="#" class="btn btn-primary btn-received" data-id="{{ $order->orders_id }}">Đã nhận
-                                        sản phẩm</a>
+                                    <button class="btn btn-success btn-received" data-id="{{ $order->orders_id }}">Đã nhận sản phẩm</button>
                                 @elseif ($order->status !== 'Đã xử lý xong')
-                                    <a href="#" class="btn btn-primary btn-view-detail" data-id="{{ $order->id }}">Xem</a>
+                                    <button class="btn btn-primary btn-view-detail" data-id="{{ $order->id }}">Xem</button>
                                 @endif
                             </td>
                         </tr>
@@ -66,6 +65,4 @@
         </div>
     </div>
 </div>
-</div>
-
 @endsection

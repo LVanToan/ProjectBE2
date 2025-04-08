@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,7 +17,6 @@ class DatabaseSeeder extends Seeder
     //     //     'name' => 'Test User',
     //     //     'email' => 'test@example.com',
     //     // ]);
-
 
     // }
 
@@ -43,7 +41,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OrdersTableSeeder::class);
         $this->call(OrderItemsTableSeeder::class, );
         $this->call(BankAccountsTableSeeder::class);
-        
-
+        $this->call(ReturnsOrderTableSeeder::class);
     }
 }
