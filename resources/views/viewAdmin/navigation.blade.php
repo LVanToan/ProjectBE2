@@ -88,7 +88,7 @@
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('dashboard') ? 'bg-gradient-primary' : '' }}"
-                        href="{{ url('dashboard') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -99,7 +99,7 @@
                 <!-- Tables -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('tables') ? 'bg-gradient-primary' : '' }}"
-                        href="{{ url('tables') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <!-- <i class="material-icons opacity-10">table_view</i> -->
                             <i class="material-icons fa fa-user me-sm-1"></i>
@@ -111,7 +111,7 @@
                 <!-- Products -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'products.showListProducts' ? 'bg-gradient-primary' : '' }}"
-                        href="{{ route('products.showListProducts') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -122,7 +122,7 @@
                 <!-- Categories -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'showCategories' ? 'bg-gradient-primary' : '' }}"
-                        href="{{ route('showCategories') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -133,7 +133,7 @@
                 <!-- Blogs -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('blogs_admin') ? 'bg-gradient-primary' : '' }}"
-                        href="{{ url('blogs_admin') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -144,7 +144,7 @@
                 <!-- Reviews -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'review.show' ? 'bg-gradient-primary' : '' }}"
-                        href="{{ route('review.show') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -157,7 +157,7 @@
                 <!-- Contact -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('contact_admin') ? 'bg-gradient-primary' : '' }}"
-                        href="{{ url('contact_admin') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">view_in_ar</i>
                         </div>
@@ -168,7 +168,7 @@
                 <!-- Voucher -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('vocher_home') ? 'bg-gradient-primary' : '' }}"
-                        href="{{ url('vocher_home') }}">
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                         </div>
@@ -178,7 +178,7 @@
                 <!-- Chetbox -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin.chatbox') ? 'bg-gradient-primary' : '' }}"
-                        href={{ route('admin.chatbox') }}>
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">chat_bubble</i>
                         </div>
@@ -188,7 +188,7 @@
                 <!-- Orders manager-->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin.orders.index') ? 'bg-gradient-primary' : '' }}"
-                        href={{ route('admin.orders.index') }}>
+                        href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">list_alt</i>
                         </div>
@@ -219,7 +219,7 @@
                     <!-- Nếu đã đăng nhập, hiển thị nút Logout -->
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('logout') ? 'bg-gradient-primary' : '' }}"
-                            href="{{ route('logout') }}">
+                            href="#">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">logout</i>
                             </div>
@@ -230,7 +230,7 @@
                     <!-- Nếu chưa đăng nhập, hiển thị nút Sign In và Sign Up -->
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->routeIs('auth') ? 'bg-gradient-primary' : '' }}"
-                            href="{{ route('auth') }}">
+                            href="#">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">assignment</i>
                             </div>
