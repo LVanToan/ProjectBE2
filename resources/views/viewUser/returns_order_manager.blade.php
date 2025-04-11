@@ -10,14 +10,14 @@
             <div class="col-lg-3">
                 <ul class="account-nav">
                     <li><a href="account_dashboard.html" class="menu-link menu-link_us-s">Dashboard</a></li>
-                    <li><a href="{{ route('order.manager.show') }}" class="menu-link menu-link_us-s">Orders</a></li>
-                    <li><a href="{{ route('returns_order_manager.index') }}"
+                    <li><a href="#" class="menu-link menu-link_us-s">Orders</a></li>
+                    <li><a href="#"
                             class="menu-link menu-link_us-s menu-link_active">Return
                             Orders</a></li>
                     <li><a href="account_edit_address.html" class="menu-link menu-link_us-s">Addresses</a></li>
                     <li><a href="account_edit.html" class="menu-link menu-link_us-s">Account Details</a></li>
-                    <li><a href="{{ route('wishlist.index') }}" class="menu-link menu-link_us-s">Wishlist</a></li>
-                    <li><a href="login_register.html" class="menu-link menu-link_us-s">Logout</a></li>
+                    <li><a href="#" class="menu-link menu-link_us-s">Wishlist</a></li>
+                    <li><a href="#" class="menu-link menu-link_us-s">Logout</a></li>
                 </ul>
             </div>
             <div class="col-lg-9">

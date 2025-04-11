@@ -40,7 +40,8 @@
                             Women Clothes</h2>
                         <h2 class="h2 fw-normal mb-3 mb-lg-4 animate animate_fade animate_btt animate_delay-5">399,50 TL
                         </h2>
-                        <a href="{{ route('locgia') }}"
+                        <!-- route('locgia') -->
+                        <a href="#"
                             class="btn-link btn-link_md default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
                             Now</a>
                     </div>
@@ -62,7 +63,8 @@
                             Jacket</h2>
                         <h2 class="h2 fw-normal mb-3 mb-lg-4 animate animate_fade animate_btt animate_delay-5">399,50 TL
                         </h2>
-                        <a href="{{ route('locgia') }}"
+                         <!-- route('locgia') -->
+                        <a href="#" 
                             class="btn-link btn-link_md default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
                             Now</a>
                     </div>
@@ -92,7 +94,7 @@
         <section class="blog-carousel container">
             <div class="d-flex align-items-center justify-content-between flex-wrap mb-3 pb-xl-2 mb-xl-4">
                 <!-- <h2 class="section-title fw-normal text-center">Categories</h2> -->
-                <!-- <a class="btn-link btn-link_md default-underline text-uppercase fw-medium" href="{{ route('locgia') }}">See all categories</a> -->
+                <!-- <a class="btn-link btn-link_md default-underline text-uppercase fw-medium" href="#">See all categories</a> -->  <!-- route('locgia') -->
             </div>
 
             <div class="position-relative">
@@ -130,7 +132,8 @@
                                     src="{{ asset('assets/img/categories/' . $category->image) }}" width="450"
                                     height="450" alt="">
                                 <div class="content_abs bottom-0 text-center mx-3 mx-xl-4 mb-3 mb-xl-4 pb-2 px-2">
-                                    <a href="{{ route('locgia.category', $category->category_id) }}"
+                                     <!-- route('locgia'), $category->category_id -->
+                                    <a href="#"
                                         class="btn btn-outline-primary border-0 fs-base fw-normal btn-45 border-circle d-inline-flex align-items-center py-1">
                                         <span>{{ $category->category_name }}</span>
                                     </a>
@@ -151,7 +154,7 @@
             <div class="d-flex align-items-center justify-content-between flex-wrap mb-3 pb-xl-2 mb-xl-4">
                 <h2 class="section-title fw-normal text-center">Top Selling Products</h2>
                 <a class="btn-link btn-link_md default-underline text-uppercase fw-medium"
-                    href="{{ route('locgia') }}">See All Products</a>
+                    href="#">See All Products</a> <!-- route('locgia')  -->
             </div>
             <div id="product_topsell" class="position-relative">
                 <div class="swiper-container js-swiper-slider" data-settings='{
@@ -189,19 +192,22 @@
                         @foreach ($topSellingProducts as $product)
                         <div class="swiper-slide product-card product-card_style3">
                             <div class="pc__img-wrapper border-radius-0">
-                                <a href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">
+                                <!--  route('product.show', Crypt::encryptString($product['product_id'])) -->
+                                <a href="#">
                                     <img loading="lazy" src="{{ asset($product['images'][0]) }}" width="330"
                                         height="400" alt="{{ $product['name'] }}" class="pc__img">
                                 </a>
                             </div>
                             <div class="pc__info position-relative">
                                 <p class="pc__category text-uppercase">{{ $product['category_name'] }}</p>
-                                <h6 class="pc__title mb-2"><a
-                                        href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">{{ $product['name'] }}</a>
+                                <h6 class="pc__title mb-2">
+                                    <!-- route('product.show', Crypt::encryptString($product['product_id']))  -->
+                                <a href="#">{{ $product['name'] }}</a>
                                 </h6>
                                 <div class="product-card__price d-flex align-items-center">
-                                    <span class="money price"><a
-                                            href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">{{ number_format($product['price'], 0, ',', '.') }}
+                                    <span class="money price">
+                                        <!-- route('product.show', Crypt::encryptString($product['product_id'])) }}"-->
+                                        <a href="#">{{ number_format($product['price'], 0, ',', '.') }}
                                             VND</a></span>
                                 </div>
                                 <div class="product-card__price d-flex align-items-center">
@@ -315,8 +321,9 @@
                                 @foreach($productsByCategory[$category->category_id] as $product)
                                 <div class="swiper-slide product-card product-card_style3">
                                     <div class="pc__img-wrapper border-radius-0">
+                                        <!-- route('product.show', Crypt::encryptString($product['product_id'])) -->
                                         <a
-                                            href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">
+                                            href="#">
                                             <img loading="lazy"
                                                 src="{{ !empty($product['images']) ? $product['images'][0] : 'default.jpg' }}"
                                                 width="330" height="400" alt="{{ $product['name'] }}" class="pc__img">
@@ -325,12 +332,14 @@
 
                                     <div class="pc__info position-relative">
                                         <p class="pc__category text-uppercase">{{ $product['category_name'] }}</p>
-                                        <h6 class="pc__title mb-2"><a
-                                                href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">{{ $product['name'] }}</a>
+                                        <h6 class="pc__title mb-2">
+                                            <!-- route('product.show', Crypt::encryptString($product['product_id'])) -->
+                                            <a href="#">{{ $product['name'] }}</a>
                                         </h6>
                                         <div class="product-card__price d-flex align-items-center">
-                                            <span class="money price"><a
-                                                    href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">{{ number_format($product['price'], 0, ',', '.') }}
+                                            <span class="money price">
+                                                <!-- route('product.show', Crypt::encryptString($product['product_id']))  -->
+                                                <a href="#">{{ number_format($product['price'], 0, ',', '.') }}
                                                     VND</a></span>
                                         </div>
                                         <div class="product-card__price d-flex align-items-center">
@@ -467,8 +476,9 @@
         <section class="products-carousel container">
             <div class="d-flex align-items-center justify-content-between flex-wrap mb-3 pb-xl-2 mb-xl-4">
                 <h2 class="section-title fw-normal text-center">New Arrivals</h2>
+                <!-- route('locgia')  -->
                 <a class="btn-link btn-link_md default-underline text-uppercase fw-medium"
-                    href="{{ route('locgia') }}">See All Products</a>
+                    href="#">See All Products</a> 
             </div>
             <div id="product_sneakers" class="position-relative">
                 <div class="swiper-container js-swiper-slider" data-settings='{
@@ -506,7 +516,8 @@
                         @foreach ($products as $product)
                         <div class="swiper-slide product-card product-card_style3">
                             <div class="pc__img-wrapper border-radius-0">
-                                <a href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">
+                                <!-- route('product.show', Crypt::encryptString($product['product_id'])) -->
+                                <a href="#">
                                     <img loading="lazy" src="{{ asset($product['images'][0]) }}" width="330"
                                         height="400" alt="{{ $product['name'] }}" class="pc__img">
                                 </a>
@@ -514,12 +525,14 @@
 
                             <div class="pc__info position-relative">
                                 <p class="pc__category text-uppercase">{{ $product['category'] }}</p>
+                                <!-- route('product.show', Crypt::encryptString($product['product_id'])) -->
                                 <h6 class="pc__title mb-2"><a
-                                        href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">{{ $product['name'] }}</a>
+                                        href="#">{{ $product['name'] }}</a>
                                 </h6>
                                 <div class="product-card__price d-flex align-items-center">
+                                    <!-- route('product.show', Crypt::encryptString($product['product_id']))  -->
                                     <span class="money price"><a
-                                            href="{{ route('product.show', Crypt::encryptString($product['product_id'])) }}">{{ number_format($product['price'], 0, ',', '.') }}
+                                            href="#">{{ number_format($product['price'], 0, ',', '.') }}
                                             VND</a></span>
                                 </div>
                                 <div class="product-card__price d-flex align-items-center">
@@ -548,7 +561,8 @@
                                         <use href="#icon_heart" />
                                     </svg>
                                 </button>
-                                <!-- <form action="{{ route('wishlist.add', $product['product_id']) }}" method="POST"
+                                <!-- route('wishlist.add', $product['product_id']) -->
+                                <!-- <form action="#" method="POST"
                                     class="add-to-wishlist-form">
                                     @csrf
                                     <button type="submit" class="menu-link menu-link_us-s add-to-wishlist">
@@ -584,8 +598,9 @@
         <section class="blog-carousel container">
             <div class="d-flex align-items-center justify-content-between flex-wrap mb-3 pb-xl-2 mb-xl-4">
                 <h2 class="section-title fw-normal text-center">Latest Blogs</h2>
+                <!-- route('blog.index') -->
                 <a class="btn-link btn-link_md default-underline text-uppercase fw-medium"
-                    href="{{ route('blog.index') }}">Read all articles</a>
+                    href="#">Read all articles</a>
             </div>
 
             <div class="position-relative">
@@ -619,7 +634,8 @@
                         @foreach($blogs as $blog)
                         <div class="swiper-slide blog-grid__item mb-4">
                             <div class="blog-grid__item-image">
-                                <a href="{{ route('blog.detail', ['blog_id' => $blog->blog_id]) }}"><img loading="lazy"
+                                <!-- route('blog.detail', ['blog_id' => $blog->blog_id]) -->
+                                <a href="#"><img loading="lazy"
                                         class="h-auto" src="{{ asset( $blog->image_url ) }}" width="450" height="300"
                                         alt=""></a>
                             </div>
@@ -631,8 +647,9 @@
                                     <span class="blog-grid__item-meta__date">{{ $blog->created_at }}</span>
                                 </div>
                                 <div class="blog-grid__item-title mb-0">
+                                    <!-- route('blog.detail', ['blog_id' => $blog->blog_id]) -->
                                     <a
-                                        href="{{ route('blog.detail', ['blog_id' => $blog->blog_id]) }}">{{ $blog->title }}</a>
+                                        href="#">{{ $blog->title }}</a>
                                 </div>
                             </div>
                         </div>

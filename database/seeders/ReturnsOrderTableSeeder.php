@@ -43,7 +43,7 @@ class ReturnsOrderTableSeeder extends Seeder
                 'updated_at'           => now(),
             ],
             [
-                'user_id'              => 3,
+                'user_id'              => 13,
                 'orders_id'            => 7892,
                 'product_id'           => 3,
                 'status_product'       => 'damaged',
@@ -58,7 +58,7 @@ class ReturnsOrderTableSeeder extends Seeder
                 'updated_at'           => now(),
             ],
             [
-                'user_id'              => 4,
+                'user_id'              => 13,
                 'orders_id'            => 9012,
                 'product_id'           => 4,
                 'status_product'       => 'wrong_size',

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const orderId = this.getAttribute('data-id');
-            window.location.href = '/returns-orders/' + orderId;
+            window.location.href = '/admin/returns-orders/' + orderId;
         });
     });
 

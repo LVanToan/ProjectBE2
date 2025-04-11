@@ -285,7 +285,7 @@
                 </a>
             </div><!-- /.logo -->
 
-            <a href="{{ route('cart.show') }}" class="header-tools__item header-tools__cart">
+            <a href="#" class="header-tools__item header-tools__cart">
                 <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_cart" />
@@ -357,7 +357,7 @@
                                             <use href="#icon_next_sm" />
                                         </svg></a>
                                     <div class="sub-menu__wrapper position-absolute top-0 start-100 w-100 d-none">
-                                        <a href="{{ route('locgia') }}"
+                                        <a href="#"
                                             class="navigation__link js-nav-left d-flex align-items-center border-bottom mb-2"><svg
                                                 class="me-2" width="7" height="11" viewBox="0 0 7 11"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -583,7 +583,7 @@
     <header id="header" class="header header_sticky">
         <div class="container">
             <div class="header-desk header-desk_type_1">
-                <div class="logo"><a href="{{ route('home.show') }}">
+                <div class="logo"><a href="#">
                         <img src="{{ asset('assets/img/logos/logoJ97.png') }}" alt="J Shop" class="logo__image d-block"
                             style="width:2em;">
                     </a>
@@ -592,7 +592,7 @@
                 <nav class="navigation">
                     <ul class="navigation__list list-unstyled d-flex">
                         <li class="navigation__item">
-                            <a href="{{ route('home.show') }}" class="navigation__link">Home</a>
+                            <a href="#" class="navigation__link">Home</a>
                             <!-- <div class="box-menu" style="width: 800px;">
                                 <div class="col pe-4">
                                     <ul class="sub-menu__list list-unstyled">
@@ -604,12 +604,12 @@
                             <!-- /.box-menu -->
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('locgia') }}" class="navigation__link">Category</a>
+                            <a href="#" class="navigation__link">Category</a>
                         </li>
 
 
                         <li class="navigation__item">
-                            <a href="{{ route('blog.index') }}" class="navigation__link">Blog</a>
+                            <a href="#" class="navigation__link">Blog</a>
                             <!-- <ul class="default-menu list-unstyled"> -->
                             <!-- Bạn có thể thêm các menu phụ tại đây nếu cần -->
                             <!-- </ul> -->
@@ -623,13 +623,13 @@
                             </ul>
                         </li> -->
                         <li class="navigation__item">
-                            <a href="{{ route('about-us.show') }}" class="navigation__link">About</a>
+                            <a href="#" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('contact') }}" class="navigation__link">Contact</a>
+                            <a href="#" class="navigation__link">Contact</a>
                         </li>
                         <!-- <li class="locgia__item">
-                            <a href="{{ route('locgia') }}" class="locgia__link">Lọc Giá</a>
+                            <a href="#" class="locgia__link">Lọc Giá</a>
                         </li> -->
 
                     </ul><!-- /.navigation__list -->
@@ -650,7 +650,7 @@
                         </div>
 
                         <div class="search-popup js-hidden-content">
-                            <form action="{{ route('product.search') }}" method="GET" class="search-field container">
+                            <form action="#" method="GET" class="search-field container">
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
                                     <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
@@ -689,7 +689,8 @@
 
                     <div class="header-tools__item hover-container">
                         @if (auth()->check())
-                        <a class="" href="{{ route('profile') }}" data-aside="customerForms">
+                        <!-- route('profile')  -->
+                        <a class="" href="#" data-aside="customerForms">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <use href="#icon_user" />
@@ -708,7 +709,7 @@
 
                     </div>
 
-                    <a href="{{ route('cart.show') }}" class="header-tools__item header-tools__cart">
+                    <a href="#" class="header-tools__item header-tools__cart">
                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_cart" />
@@ -716,13 +717,13 @@
                         <!-- <span class="cart-amount d-block position-absolute js-cart-items-count">3</span> -->
                     </a>
 
-                    <a class="header-tools__item" href="{{ route('wishlist.index') }}">
+                    <a class="header-tools__item" href="#">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_heart" />
                         </svg>
                     </a>
 
-                    <a class="header-tools__item" href="{{ route('order.manager.show') }}">
+                    <a class="header-tools__item" href="#">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_cart" />
                         </svg>
@@ -743,7 +744,7 @@
             <div class="row row-cols-lg-5 row-cols-2">
                 <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
                     <div class="logo">
-                        <a href="{{ route('home.show') }}">
+                        <a href="#">
                             <img src="../images/logo.png" alt="GroupD" class="logo__image d-block">
                         </a>
                     </div><!-- /.logo -->
@@ -1238,7 +1239,7 @@
                             <input name="remember" class="form-check-input form-check-input_fill" type="checkbox" value="" id="flexCheckDefault">
                             <label class="form-check-label text-secondary" for="flexCheckDefault">Remember me</label>
                         </div>
-                        <a href="{{ route('password.request') }}" class="btn-text ms-auto">Lost password?</a>
+                        <a href="#" class="btn-text ms-auto">Lost password?</a>
                     </div>
 
                     <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
@@ -1260,7 +1261,7 @@
                     <button class="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
                 </div><!-- /.aside-header -->
 
-                <form action="{{ route('register') }}" method="POST" name="register-form" id="register-form" class="aside-content needs-validation" novalidate>
+                <form action="#" method="POST" name="register-form" id="register-form" class="aside-content needs-validation" novalidate>
                     @csrf
                     <div class="form-floating mb-4">
                         <input name="name" type="text" class="form-control form-control_gray" id="customerNameRegisterInput" placeholder="Username" required>

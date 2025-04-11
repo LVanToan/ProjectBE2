@@ -49,7 +49,8 @@
                 </div>
             </div>
             <div class="buttons mt-4">
-                <a href="{{ route('returns.orders.index') }}" class="btn btn-secondary btn-back">Quay lại</a>
+               
+                <a href="{{ route('admin.returns_orders') }}" class="btn btn-secondary btn-back">Quay lại</a>
                 @if($returnsOrderDetails->status != 'Đã xong')
                     <a href="#" class="btn btn-secondary btn-Confirm" data-id="{{ $returnsOrderDetails->id }}"
                         data-product-id="{{ $returnsOrderDetails->product_id }}"
