@@ -6585,10 +6585,10 @@ fieldset:disabled .btn {
 }
 
 .modal-content {
-    position: relative;
+    position: fixed; /* Đặt vị trí cố định để modal luôn nằm trong khung hình */
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
     color: var(--bs-modal-color);
     pointer-events: auto;
     background-color: var(--bs-modal-bg);
@@ -6596,6 +6596,14 @@ fieldset:disabled .btn {
     border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
     border-radius: var(--bs-modal-border-radius);
     outline: 0;
+
+    /* Căn giữa modal */
+    top: 50%; /* Đặt modal ở giữa chiều dọc */
+    left: 50%; /* Đặt modal ở giữa chiều ngang */
+    transform: translate(
+        -50%,
+        -50%
+    ); /* Dịch chuyển modal để căn giữa chính xác */
 }
 
 .modal-backdrop {

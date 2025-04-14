@@ -3,15 +3,22 @@
 function showImageModal(src) {
     var modal = document.getElementById("imageModal");
     var modalImg = document.getElementById("modalImage");
-    modal.style.display = "block";
+    modal.style.display = "flex"; // dùng flex để căn giữa
+
     modalImg.src = src;
+
+    // Đóng modal nếu người dùng nhấn ra ngoài ảnh
+    modal.onclick = function (event) {
+        if (event.target === modal) {
+            closeImageModal();
+        }
+    }
 }
 
 function closeImageModal() {
     var modal = document.getElementById("imageModal");
     modal.style.display = "none";
 }
-
 function submitReturnForm(button) {
     const form = document.getElementById('returnForm');
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Chiêu',
-                'email' => 'thuan@gmail.com',
+                'email' => 'chieu1@gmail.com',
                 'password' => Hash::make('1234'),
                 'phone' => '0987456123',
                 'role' => 1,
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 2,
                 'name' => 'Toàn',
-                'email' => 'thai@gmail.com',
+                'email' => 'toan@gmail.com',
                 'password' => Hash::make('1234'),
                 'phone' => '0456789123',
                 'role' => 1,
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 3,
                 'name' => 'Hoàng Anh',
-                'email' => 'hoang@gmail.com',
+                'email' => 'hoanganh@gmail.com',
                 'password' => Hash::make('1234'),
                 'phone' => '0123456897',
                 'role' => 1,
@@ -87,7 +87,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 6,
                 'name' => 'Phát',
-                'email' => 'user6@gmail.com',
+                'email' => 'phat@gmail.com',
                 'password' => Hash::make('1234'),
                 'phone' => '0900000006',
                 'role' => rand(0, 1),

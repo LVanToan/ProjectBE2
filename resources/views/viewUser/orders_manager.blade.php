@@ -10,11 +10,12 @@
                 <ul class="account-nav">
                     <li><a href="account_dashboard.html" class="menu-link menu-link_us-s">Dashboard</a></li>
                     <li><a href="account_orders.html" class="menu-link menu-link_us-s menu-link_active">Orders</a></li>
-                    <li><a href="{{ route('returns_order_manager.index') }}" class="menu-link menu-link_us-s">Return
+                    <li><a href="{{ route('returns_order_manager') }}" class="menu-link menu-link_us-s">Return
                             Orders</a></li>
                     <li><a href="account_edit_address.html" class="menu-link menu-link_us-s">Addresses</a></li>
                     <li><a href="account_edit.html" class="menu-link menu-link_us-s">Account Details</a></li>
-                    <li><a href="{{ route('wishlist.index') }}" class="menu-link menu-link_us-s">Wishlist</a></li>
+                    <!-- route('wishlist.index') -->
+                    <li><a href="#" class="menu-link menu-link_us-s">Wishlist</a></li>
                     <li><a href="login_register.html" class="menu-link menu-link_us-s">Logout</a></li>
                 </ul>
             </div>
