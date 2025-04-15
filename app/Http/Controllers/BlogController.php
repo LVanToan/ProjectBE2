@@ -233,7 +233,7 @@ class BlogController extends Controller
     {
         $comment = Comment::findOrFail($comment_id);
 
-        // Kiểm tra nếu người dùng hiện tại là tác giả của bình luận
+        
         if ($comment->user_id !== auth()->id()) {
             return redirect()->back()->with('error', 'Bạn không có quyền xóa bình luận này');
         }
