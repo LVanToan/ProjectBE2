@@ -11,6 +11,7 @@ use App\Http\Controllers\ReturnsOrderAdminController;
 use App\Http\Controllers\ReturnsOrderManagerController;
 use App\Http\Controllers\ReturnsOrderDetailAdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +66,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+
+
+Route::get('/products/search', [ProductsController::class, 'searchProducts'])->name('products.search');

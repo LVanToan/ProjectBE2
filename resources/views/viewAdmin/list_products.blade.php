@@ -11,7 +11,7 @@
             <button class="btn btn-link"><i class="fas fa-download"></i> Xuất file</button>
             <button class="btn btn-link"><i class="fas fa-upload"></i> Nhập file</button>
         </div> -->
-        <a href="{{ route('products.add') }}" class="btn btn-link">
+        <a href="#" class="btn btn-link">
             <i class="fas fa-plus-circle"></i> Thêm Sản Phẩm
         </a>
     </div>
