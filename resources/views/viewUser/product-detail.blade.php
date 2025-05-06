@@ -632,7 +632,7 @@ alert("{{ session('delete-wishlist-success') }}");
 
 <div class="mb-5 pb-xl-5"></div>
 <!-- Bao gồm component chatbox -->
-<x-chatbox />
+@include('viewUser.chatbox')
 <script>
 function toggleMenu(menuId) {
     const menu = document.getElementById(menuId);
