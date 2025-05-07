@@ -12,6 +12,8 @@
     bottom: 20px;
     right: 20px;
     width: 400px;
+    z-index: 1000; /* Đảm bảo chatbox nằm trên các phần tử khác */
+    pointer-events: auto;
 }
 
 .chatbox-toggle {

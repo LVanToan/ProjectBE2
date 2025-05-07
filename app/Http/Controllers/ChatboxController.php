@@ -22,6 +22,7 @@ class ChatboxController extends Controller
 
         return response()->json(['success' => true, 'updated_at' => $chatboxData->updated_at->format('d/m/Y')]);
     }
+    
 
     public function saveChatboxData(Request $request)
     {

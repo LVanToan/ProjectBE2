@@ -98,8 +98,7 @@
 
                 <!-- Tables -->
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('tables') ? 'bg-gradient-primary' : '' }}"
-                        href="#">
+                    <a class="nav-link text-white {{ request()->is('tables') ? 'bg-gradient-primary' : '' }}" href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <!-- <i class="material-icons opacity-10">table_view</i> -->
                             <i class="material-icons fa fa-user me-sm-1"></i>
@@ -178,7 +177,7 @@
                 <!-- Chetbox -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin.chatbox') ? 'bg-gradient-primary' : '' }}"
-                        href="#">
+                        href="{{ route('admin.chatbox') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">chat_bubble</i>
                         </div>
@@ -188,7 +187,7 @@
                 <!-- Orders manager-->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin.orders.index') ? 'bg-gradient-primary' : '' }}"
-                        href="#">
+                        href="{{route('admin.returns_orders')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">list_alt</i>
                         </div>
@@ -218,8 +217,7 @@
                 @if (auth()->check())
                     <!-- Nếu đã đăng nhập, hiển thị nút Logout -->
                     <li class="nav-item">
-                        <a class="nav-link text-white {{ request()->is('logout') ? 'bg-gradient-primary' : '' }}"
-                            href="#">
+                        <a class="nav-link text-white {{ request()->is('logout') ? 'bg-gradient-primary' : '' }}" href="#">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">logout</i>
                             </div>
@@ -256,7 +254,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('assets/js/addProducts.js') }}"></script>

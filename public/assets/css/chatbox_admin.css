@@ -54,15 +54,27 @@ th {
     border-radius: 4px;
 }
 
-button {
-    padding: 5px 10px;
+/* Áp dụng kiểu dáng cho cả nút button và link a */
+.update-status,
+.delete-record,
+.btn-message {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff; /* Màu nền xanh */
     border: none;
-    background-color: #007bff;
-    color: white;
     border-radius: 4px;
+    text-align: center;
+    text-decoration: none; /* Loại bỏ gạch chân cho link */
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+.update-status:hover,
+.delete-record:hover,
+.btn-message:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    color: #fff;
 }
