@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ForgotPasswordController extends Controller
 {
-
     public function showResetForm(Request $request, $token = null)
     {
         return view('viewUser.reset_form', ['token' => $token, 'email' => $request->email]);

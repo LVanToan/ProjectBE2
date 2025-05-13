@@ -48,6 +48,25 @@ class ProductsController extends Controller
         return view('viewUser.locgia', compact('categories', 'products'));
     }
 
+    public function search1(Request $request)
+{
+    $categories = Category::all();
+    $query = Product::with('images', 'productSizeColors.size', 'productSizeColors.color');
+
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->category_id);
+    }
+
+    if ($request->filled('search')) {
+        $query->where('product_name', 'like', '%' . $request->search . '%');
+    }
+
+    $products = $query->get();
+
+    return view('viewUser.locgia', compact('categories', 'products'));
+}
+
+
 
 
 

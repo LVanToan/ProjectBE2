@@ -22,11 +22,18 @@
             <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">Lọc sản phẩm </button>
                 <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
-                    @foreach($categories as $category)
-                    <li>
-                        <a class="dropdown-item" href="#" data-category-id="{{ $category->category_id }}">{{ $category->category_name }}</a>
-                    </li>
-                    @endforeach
+                @foreach($categories as $category)
+    <li>
+        <a class="dropdown-item"
+           href="#"
+           data-id="{{ $category->category_id }}"
+           data-name="{{ $category->category_name }}"
+           onclick="selectCategory(this.dataset.id, this.dataset.name)">
+            {{ $category->category_name }}
+        </a>
+    </li>
+@endforeach
+
                 </ul>
             </div>
             <input type="text" name="search" class="form-control" id="searchInput" placeholder="Tìm kiếm sản phẩm" aria-label="Tìm kiếm sản phẩm" autocomplete="off">
@@ -38,6 +45,14 @@
         </form>
     </div>
 
+    <script>
+    function selectCategory(id, name) {
+        document.getElementById('selectedCategoryId').value = id;
+        document.getElementById('categoryDropdown').innerText = name;
+        // Tùy chọn: Gửi form tự động
+        document.querySelector('form').submit();
+    }
+</script>
 
 
     <div class="table-responsive"> <!-- Thêm div này -->

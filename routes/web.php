@@ -245,7 +245,7 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.in
 // Route để thêm sản phẩm vào wishlist
 Route::post('/wishlist/add/{productId}', [WishlistController::class, 'add'])->name('wishlist.add');
 
-//Route::delete('/wishlist/remove/{wishlistId}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+
 // Tim kiem
 Route::get('/search-results', [ProductController::class, 'search'])->name('product.search');
 
@@ -378,7 +378,7 @@ Route::get('/about-us', function () {
 })->name('about-us.show');
 
 Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle']);
-//Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
 
 

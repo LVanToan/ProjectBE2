@@ -9,7 +9,8 @@ use App\Models\Size;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ReviewImage;
-use Crypt;
+
+use Illuminate\Support\Facades\Crypt;
 
 class ProductController extends Controller
 {

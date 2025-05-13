@@ -689,19 +689,19 @@
 
                     <div class="header-tools__item hover-container">
                         @if (auth()->check())
-                        <a class="" href="{{ route('profile') }}" data-aside="customerForms">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
+                            <a class="" href="{{ route('profile') }}" data-aside="customerForms">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
                         @else
-                        <a class="header-tools__item js-open-aside" href="#" data-aside="customerForms">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
+                            <a class="header-tools__item js-open-aside" href="#" data-aside="customerForms">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
                         @endif
 
 
@@ -744,13 +744,14 @@
                 <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
                     <div class="logo">
                         <a href="{{ route('home.show') }}">
-                            <img src="../images/logo.png" alt="GroupD" class="logo__image d-block">
+                            <img src="{{ asset('assets/img/logos/chongu.png') }}" alt="GroupC"
+                                class="logo__image d-block">
                         </a>
                     </div><!-- /.logo -->
-                    <p class="footer-address">Linh Chieu ward, Thu Duc city, Ho Chi Minh city</p>
+                    <p class="footer-address">TD ward, Thu Duc city, Ho Chi Minh city</p>
 
                     <p class="m-0">
-                        <strong class="fw-medium">groupD@gmail.com</strong>
+                        <strong class="fw-medium">groupC@gmail.com</strong>
                     </p>
                     <p>
                         <strong class="fw-medium">+84 123 456 789</strong>
@@ -864,9 +865,14 @@
 
                     <div class="mt-4 pt-3">
                         <strong class="fw-medium">Secure payments</strong>
-                        <p class="mt-2">
-                            <img loading="lazy" src="../images/payment-options.png" alt="Acceptable payment gateways">
+                        <p class="mt-2" style="display: flex; align-items: center;">
+                            <img loading="lazy" src="{{ asset('assets/img/logos/mastercard.png') }}" alt="Mastercard"
+                                style="width: 50px; height: 50px;">
+                            <img loading="lazy" src="{{ asset('assets/img/logos/visa.png') }}" alt="Visa"
+                                style="width: 50px; height: 50px;">
                         </p>
+
+
                     </div>
                 </div><!-- /.footer-column -->
             </div><!-- /.row-cols-5 -->
@@ -874,7 +880,7 @@
 
         <div class="footer-bottom container">
             <div class="d-block d-md-flex align-items-center">
-                <span class="footer-copyright me-auto">©2024 GroupD</span>
+                <span class="footer-copyright me-auto">©2024 GroupC</span>
                 <div class="footer-settings d-block d-md-flex align-items-center">
                     <div class="d-flex align-items-center">
                         <label for="footerSettingsLanguage" class="me-2 text-secondary">Language</label>
@@ -1220,7 +1226,8 @@
                 <form id="login-form" action="{{ route('login') }}" method="POST" class="aside-content" novalidate>
                     @csrf
                     <div class="form-floating mb-3">
-                        <input name="email" type="email" class="form-control form-control_gray" id="emailInput" placeholder="name@example.com" required>
+                        <input name="email" type="email" class="form-control form-control_gray" id="emailInput"
+                            placeholder="name@example.com" required>
                         <label for="emailInput">Username or email address *</label>
                         <div id="login-email-error" class="text-danger"></div> <!-- Hiển thị lỗi email -->
                     </div>
@@ -1229,13 +1236,15 @@
 
                     <div class="form-label-fixed mb-3">
                         <label for="passwordInput" class="form-label">Password *</label>
-                        <input name="password" id="passwordInput" class="form-control form-control_gray" type="password" placeholder="********" required>
+                        <input name="password" id="passwordInput" class="form-control form-control_gray" type="password"
+                            placeholder="********" required>
                         <div id="login-password-error" class="text-danger"></div> <!-- Hiển thị lỗi password -->
                     </div>
 
                     <div class="d-flex align-items-center mb-3 pb-2">
                         <div class="form-check mb-0">
-                            <input name="remember" class="form-check-input form-check-input_fill" type="checkbox" value="" id="flexCheckDefault">
+                            <input name="remember" class="form-check-input form-check-input_fill" type="checkbox"
+                                value="" id="flexCheckDefault">
                             <label class="form-check-label text-secondary" for="flexCheckDefault">Remember me</label>
                         </div>
                         <a href="{{ route('password.request') }}" class="btn-text ms-auto">Lost password?</a>
@@ -1260,10 +1269,12 @@
                     <button class="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
                 </div><!-- /.aside-header -->
 
-                <form action="{{ route('register') }}" method="POST" name="register-form" id="register-form" class="aside-content needs-validation" novalidate>
+                <form action="{{ route('register') }}" method="POST" name="register-form" id="register-form"
+                    class="aside-content needs-validation" novalidate>
                     @csrf
                     <div class="form-floating mb-4">
-                        <input name="name" type="text" class="form-control form-control_gray" id="customerNameRegisterInput" placeholder="Username" required>
+                        <input name="name" type="text" class="form-control form-control_gray"
+                            id="customerNameRegisterInput" placeholder="Username" required>
                         <label for="customerNameRegisterInput">Username</label>
                         <span id="name-error" class="text-danger"></span> <!-- Thêm span hiển thị lỗi -->
                     </div>
@@ -1271,7 +1282,8 @@
                     <div class="pb-1"></div>
 
                     <div class="form-floating mb-4">
-                        <input name="email" type="email" class="form-control form-control_gray" id="customerEmailRegisterInput" placeholder="user@company.com" required>
+                        <input name="email" type="email" class="form-control form-control_gray"
+                            id="customerEmailRegisterInput" placeholder="user@company.com" required>
                         <label for="customerEmailRegisterInput">Email address *</label>
                         <span id="email-error" class="text-danger"></span> <!-- Thêm span hiển thị lỗi -->
                     </div>
@@ -1280,18 +1292,22 @@
 
                     <div class="form-label-fixed mb-4">
                         <label for="customerPasswodRegisterInput" class="form-label">Password *</label>
-                        <input name="password" id="customerPasswodRegisterInput" class="form-control form-control_gray" type="password" placeholder="*******" required>
+                        <input name="password" id="customerPasswodRegisterInput" class="form-control form-control_gray"
+                            type="password" placeholder="*******" required>
                         <span id="password-error" class="text-danger"></span> <!-- Thêm span hiển thị lỗi -->
                     </div>
 
                     <div class="form-label-fixed mb-4">
                         <label for="customerConfirmPasswodRegisterInput" class="form-label">Confirm Password *</label>
-                        <input name="password_confirmation" id="customerConfirmPasswodRegisterInput" class="form-control form-control_gray" type="password" placeholder="*******" required>
-                        <span id="password_confirmation-error" class="text-danger"></span> <!-- Thêm span hiển thị lỗi -->
+                        <input name="password_confirmation" id="customerConfirmPasswodRegisterInput"
+                            class="form-control form-control_gray" type="password" placeholder="*******" required>
+                        <span id="password_confirmation-error" class="text-danger"></span>
+                        <!-- Thêm span hiển thị lỗi -->
                     </div>
 
                     <p class="text-secondary mb-4">
-                        Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.
+                        Your personal data will be used to support your experience throughout this website, to manage
+                        access to your account, and for other purposes described in our privacy policy.
                     </p>
 
                     <button class="btn btn-primary w-100 text-uppercase" type="submit">Register</button>
