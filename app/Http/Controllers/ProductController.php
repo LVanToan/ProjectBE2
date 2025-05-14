@@ -189,50 +189,50 @@ class ProductController extends Controller
 
 
     public function search(Request $request)
-{
-    try {
-        $searchKeyword = $request->query('search-keyword');
+    {
+        try {
+            $searchKeyword = $request->query('search-keyword');
 
-        if ($searchKeyword) {
-            // Tìm kiếm sản phẩm
-            $products = Product::with(['images', 'productSizeColors.size', 'productSizeColors.color', 'reviews', 'category'])
-                ->selectRaw("
+            if ($searchKeyword) {
+                // Tìm kiếm sản phẩm
+                $products = Product::with(['images', 'productSizeColors.size', 'productSizeColors.color', 'reviews', 'category'])
+                    ->selectRaw("
                     products.*, 
                     MATCH(name) AGAINST(? IN BOOLEAN MODE) AS relevance_name, 
                     MATCH(description) AGAINST(? IN BOOLEAN MODE) AS relevance_description
                 ", [$searchKeyword, $searchKeyword])
-                ->where(function ($q) use ($searchKeyword) {
-                    $q->whereRaw("MATCH(name) AGAINST(? IN BOOLEAN MODE)", [$searchKeyword])
-                        ->orWhereRaw("MATCH(description) AGAINST(? IN BOOLEAN MODE)", [$searchKeyword])
-                        ->orWhere('name', 'like', '%' . $searchKeyword . '%')
-                        ->orWhere('description', 'like', '%' . $searchKeyword . '%');
-                })
-                ->orderByRaw("GREATEST(relevance_name, relevance_description) DESC") // Sắp xếp theo điểm số lớn nhất
-                ->paginate(4);
+                    ->where(function ($q) use ($searchKeyword) {
+                        $q->whereRaw("MATCH(name) AGAINST(? IN BOOLEAN MODE)", [$searchKeyword])
+                            ->orWhereRaw("MATCH(description) AGAINST(? IN BOOLEAN MODE)", [$searchKeyword])
+                            ->orWhere('name', 'like', '%' . $searchKeyword . '%')
+                            ->orWhere('description', 'like', '%' . $searchKeyword . '%');
+                    })
+                    ->orderByRaw("GREATEST(relevance_name, relevance_description) DESC") // Sắp xếp theo điểm số lớn nhất
+                    ->paginate(4);
 
-            // Chuyển đổi dữ liệu sản phẩm
-            $products->getCollection()->transform(function ($product) {
-                // Sử dụng phương thức getProductDetailData() để chuẩn hóa dữ liệu
-                $data = $product->getProductDetailData();
-                $data['averageRating'] = $product->reviews->avg('rating') ?? 0;
-                $data['reviewCount'] = $product->reviews->count();
-                $data['category'] = $product->category->category_name ?? 'N/A';
-                $data['sizesAndColor'] = $product->productSizeColors;
-                return $data;
-            });
+                // Chuyển đổi dữ liệu sản phẩm
+                $products->getCollection()->transform(function ($product) {
+                    // Sử dụng phương thức getProductDetailData() để chuẩn hóa dữ liệu
+                    $data = $product->getProductDetailData();
+                    $data['averageRating'] = $product->reviews->avg('rating') ?? 0;
+                    $data['reviewCount'] = $product->reviews->count();
+                    $data['category'] = $product->category->category_name ?? 'N/A';
+                    $data['sizesAndColor'] = $product->productSizeColors;
+                    return $data;
+                });
 
-            // Trả về view với danh sách sản phẩm
-            return view('viewUser.search-results', compact('products'));
+                // Trả về view với danh sách sản phẩm
+                return view('viewUser.search-results', compact('products'));
+            }
+
+            // Nếu không có từ khóa tìm kiếm
+            return redirect()->back()->with('error', 'No search criteria provided');
+
+        } catch (\Exception $e) {
+            // Xử lý lỗi và thông báo
+            return redirect()->back()->with('error', 'Error occurred while searching for product: ' . $e->getMessage());
         }
-
-        // Nếu không có từ khóa tìm kiếm
-        return redirect()->back()->with('error', 'No search criteria provided');
-
-    } catch (\Exception $e) {
-        // Xử lý lỗi và thông báo
-        return redirect()->back()->with('error', 'Error occurred while searching for product: ' . $e->getMessage());
     }
-}
     public function searchComparsion(Request $request)
     {
         try {

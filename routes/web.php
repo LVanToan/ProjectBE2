@@ -109,3 +109,5 @@ Route::get('/returns-order-manager', [ReturnsOrderManagerController::class, 'ind
 Route::post('/api/save-chatbox-data', [ChatboxController::class, 'saveChatboxData']);
 // Hiển thị trang chi tiết sản phẩm
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+//Route tìm kiếm product
+Route::get('/search-product', [ProductController::class, 'searchComparsion']);

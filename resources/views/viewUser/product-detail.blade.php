@@ -1,7 +1,7 @@
 @extends('viewUser.navigation')
 @section('title', 'Product detail')
 @section('content')
-
+      <script src="{{ asset('assets/js/comparsion.js') }}"></script>
     <style>
         .review-options {
             position: relative;
@@ -40,20 +40,20 @@
     @if (session('add-review-error'))
         <script>
             alert("{{ session('add-review-error') }}");
-        </script>
+                        </scrip >
     @endif
 
-    @if (session('add-review-success'))
-        <script>
-            alert("{{ session('add-review-success') }}");
-        </script>
-    @endif
+            @if (session('add-review-success'))
+                < script >
+                alert("{{ session('add-review-success') }}");
+                        </>
+            @endif
 
-    @if (session('add-wishlist-success'))
-        <script>
-            alert("{{ session('add-wishlist-success') }}");
-        </script>
-    @endif
+            @if (session('add-wishlist-success'))
+                        < script >
+                        alert("{{ session('add-wishlist-success') }}");
+                </>
+            @endif
     @if (session('delete-wishlist-success'))
         <script>
             alert("{{ session('delete-wishlist-success') }}");
@@ -81,13 +81,13 @@
                                 </div>
 
                                 <!-- <div class="swiper-button-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_prev_sm" />
-                                                </svg></div>
-                                            <div class="swiper-button-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_next_sm" />
-                                                </svg></div> -->
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <use href="#icon_prev_sm" />
+                                                        </svg></div>
+                                                    <div class="swiper-button-next"><svg width="7" height="11" viewBox="0 0 7 11"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <use href="#icon_next_sm" />
+                                                        </svg></div> -->
                             </div>
                         </div>
                         <div class="product-single__thumbnail">
@@ -108,25 +108,25 @@
                 <div class="col-lg-5">
                     <div class="d-flex justify-content-between mb-4 pb-md-2">
                         <!-- <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
-                                        <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
-                                        <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
-                                        <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">The Shop</a>
-                                    </div> -->
+                                                <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
+                                                <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
+                                                <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">The Shop</a>
+                                            </div> -->
                     </div>
                     <h1 class="product-single__name">{{ $product['name'] }}</h1>
                     <div class="product-single__rating">
                         <div class="reviews-group ">{{ number_format($product['averageRating'], 1) }}
                             @for ($i = 0; $i < 5; $i++) <svg class="review-star" viewBox="0 0 9 9"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        @if (
-                                                            $i
-                                                            < $product['averageRating']
-                                                        )
-                                                                                    <use href="#icon_star" /> <!-- Sao đầy -->
-                                                        @else
-                                                            <use href="#icon_star_empty" /> <!-- Sao trống -->
-                                                        @endif
-                                                    </svg>
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    @if (
+                                            $i
+                                            < $product['averageRating']
+                                        )
+                                        <use href="#icon_star" /> <!-- Sao đầy -->
+                                    @else
+                                        <use href="#icon_star_empty" /> <!-- Sao trống -->
+                                    @endif
+                                </svg>
                             @endfor
                         </div>
                         <span
@@ -353,25 +353,25 @@
                         aria-labelledby="tab-additional-info-tab">
                         <div class="product-single__addtional-info">
                             <!-- <div class="item">
-                                            <label class="h6">Weight</label>
-                                            <span>1.25 kg</span>
-                                        </div>
-                                        <div class="item">
-                                            <label class="h6">Dimensions</label>
-                                            <span>90 x 60 x 90 cm</span>
-                                        </div>
-                                        <div class="item">
-                                            <label class="h6">Size</label>
-                                            <span>XS, S, M, L, XL</span>
-                                        </div>
-                                        <div class="item">
-                                            <label class="h6">Color</label>
-                                            <span>Black, Orange, White</span>
-                                        </div>
-                                        <div class="item">
-                                            <label class="h6">Storage</label>
-                                            <span>Relaxed fit shirt-style dress with a rugged</span>
-                                        </div> -->
+                                                    <label class="h6">Weight</label>
+                                                    <span>1.25 kg</span>
+                                                </div>
+                                                <div class="item">
+                                                    <label class="h6">Dimensions</label>
+                                                    <span>90 x 60 x 90 cm</span>
+                                                </div>
+                                                <div class="item">
+                                                    <label class="h6">Size</label>
+                                                    <span>XS, S, M, L, XL</span>
+                                                </div>
+                                                <div class="item">
+                                                    <label class="h6">Color</label>
+                                                    <span>Black, Orange, White</span>
+                                                </div>
+                                                <div class="item">
+                                                    <label class="h6">Storage</label>
+                                                    <span>Relaxed fit shirt-style dress with a rugged</span>
+                                                </div> -->
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tab-reviews" role="tabpanel" aria-labelledby="tab-reviews-tab">
@@ -513,36 +513,36 @@
             <h2 class="h3 text-uppercase mb-4 pb-xl-2 mb-xl-4">Other <strong>Products</strong></h2>
             <div id="product_sneakers" class="position-relative">
                 <div class="swiper-container js-swiper-slider" data-settings='{
-                            "autoplay": {
-                              "delay": 3000
-                            },
-                            "slidesPerView": 4,
-                            "slidesPerGroup": 1,
-                            "effect": "none",
-                            "loop": false,
-                            "navigation": {
-                              "nextEl": "#product_sneakers .products-carousel__next",
-                              "prevEl": "#product_sneakers .products-carousel__prev"
-                            },
-                            "breakpoints": {
-                              "320": {
-                                "slidesPerView": 2,
-                                "slidesPerGroup": 2,
-                                "spaceBetween": 14
-                              },
-                              "768": {
-                                "slidesPerView": 3,
-                                "slidesPerGroup": 3,
-                                "spaceBetween": 24
-                              },
-                              "992": {
-                                "slidesPerView": 4,
-                                "slidesPerGroup": 1,
-                                "spaceBetween": 30,
-                                "pagination": false
-                              }
-                            }
-                          }'>
+                                    "autoplay": {
+                                      "delay": 3000
+                                    },
+                                    "slidesPerView": 4,
+                                    "slidesPerGroup": 1,
+                                    "effect": "none",
+                                    "loop": false,
+                                    "navigation": {
+                                      "nextEl": "#product_sneakers .products-carousel__next",
+                                      "prevEl": "#product_sneakers .products-carousel__prev"
+                                    },
+                                    "breakpoints": {
+                                      "320": {
+                                        "slidesPerView": 2,
+                                        "slidesPerGroup": 2,
+                                        "spaceBetween": 14
+                                      },
+                                      "768": {
+                                        "slidesPerView": 3,
+                                        "slidesPerGroup": 3,
+                                        "spaceBetween": 24
+                                      },
+                                      "992": {
+                                        "slidesPerView": 4,
+                                        "slidesPerGroup": 1,
+                                        "spaceBetween": 30,
+                                        "pagination": false
+                                      }
+                                    }
+                                  }'>
                     <div class="swiper-wrapper">
                         @foreach ($productsRandom as $product)
                             <div class="swiper-slide product-card product-card_style3">
@@ -568,11 +568,11 @@
                                         @if ($product['reviewCount'] > 0)
                                             <span class="money price ms-5">
                                                 @for ($i = 0; $i < 5; $i++) @if ($i < $product['averageRating'])<svg
-                                                    class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_star" />
-                                                @else
-                                                    {{ '' }}
-                                                @endif
+                                                        class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                                        <use href="#icon_star" />
+                                                    @else
+                                                            {{ '' }}
+                                                        @endif
                                                     </svg>
                                                 @endfor
                                                 ({{ $product['reviewCount']}})
@@ -590,23 +590,23 @@
                                     </button>
 
                                     <!-- <button
-                                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                                                title="Add To Wishlist">
-                                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <use href="#icon_heart" />
-                                                                </svg>
-                                                            </button> -->
+                                                                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
+                                                                                title="Add To Wishlist">
+                                                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                    <use href="#icon_heart" />
+                                                                                </svg>
+                                                                            </button> -->
                                     <!-- <form action="#" method="POST"
-                                                                    class="add-to-wishlist-form">
-                                                                    @csrf
-                                                                    <button type="submit" class="menu-link menu-link_us-s add-to-wishlist">
-                                                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <use href="#icon_heart" />
-                                                                        </svg>
-                                                                    </button>
-                                                                </form> -->
+                                                                                    class="add-to-wishlist-form">
+                                                                                    @csrf
+                                                                                    <button type="submit" class="menu-link menu-link_us-s add-to-wishlist">
+                                                                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
+                                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                                            <use href="#icon_heart" />
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                </form> -->
                                 </div>
                             </div>
                         @endforeach
