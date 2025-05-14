@@ -58,6 +58,25 @@ alert("{{ session('add-wishlist-success') }}");
 <script>
 alert("{{ session('delete-wishlist-success') }}");
 </script>
+<script>
+function fetchQuantityAndPrice(productId, sizeId, colorId) {
+    fetch(`/getQuantityAndPrice?product_id=${productId}&size_id=${sizeId}&color_id=${colorId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('quantity').textContent = data.quantity;
+            document.getElementById('price').textContent = data.price + ' VND';
+        });
+}
+document.querySelectorAll('.size, .color').forEach(item => {
+    item.addEventListener('change', function() {
+        const productId = document.getElementById('product_id').value;
+        const sizeId = document.getElementById('size_select').value;
+        const colorId = document.getElementById('color_select').value;
+        fetchQuantityAndPrice(productId, sizeId, colorId);
+    });
+});
+
+</script>
 @endif
 
 <main>
