@@ -75,7 +75,6 @@ Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEm
 Route::post('password/reset', [ForgotPasswordController::class, 'reset'])->name('password.update');
 Route::get('password/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
 
-
 // Route trang hiển thị danh sách người dùng (tables.blade.php)
 Route::get('/tables', [UserController::class, 'index'])->name('tables');
 

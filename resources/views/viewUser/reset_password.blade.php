@@ -78,7 +78,7 @@
                 if (data.status === 'error') {
                     // Hiển thị lỗi
                     for (const [field, messages] of Object.entries(data.errors)) {
-                        let input = document.querySelector(`[name="${field}"]`);
+                        let input = document.querySelector (`[name="${field}"]`);
                         if (input) {
                             let errorDiv = document.createElement('div');
                             errorDiv.classList.add('text-danger', 'mt-1');
