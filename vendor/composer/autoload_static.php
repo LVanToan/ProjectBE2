@@ -334,13 +334,13 @@ class ComposerStaticInit609601c27861cef503664a6951c6dc45
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            1 => __DIR__ . '/..' . '/spatie/ignition/src',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -376,8 +376,8 @@ class ComposerStaticInit609601c27861cef503664a6951c6dc45
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -4073,6 +4073,7 @@ class ComposerStaticInit609601c27861cef503664a6951c6dc45
         'OpenTelemetry\\Context\\FiberBoundContextStorageExecutionAwareBC' => __DIR__ . '/..' . '/open-telemetry/context/FiberBoundContextStorageExecutionAwareBC.php',
         'OpenTelemetry\\Context\\ImplicitContextKeyedInterface' => __DIR__ . '/..' . '/open-telemetry/context/ImplicitContextKeyedInterface.php',
         'OpenTelemetry\\Context\\Propagation\\ArrayAccessGetterSetter' => __DIR__ . '/..' . '/open-telemetry/context/Propagation/ArrayAccessGetterSetter.php',
+        'OpenTelemetry\\Context\\Propagation\\ExtendedPropagationGetterInterface' => __DIR__ . '/..' . '/open-telemetry/context/Propagation/ExtendedPropagationGetterInterface.php',
         'OpenTelemetry\\Context\\Propagation\\MultiTextMapPropagator' => __DIR__ . '/..' . '/open-telemetry/context/Propagation/MultiTextMapPropagator.php',
         'OpenTelemetry\\Context\\Propagation\\NoopTextMapPropagator' => __DIR__ . '/..' . '/open-telemetry/context/Propagation/NoopTextMapPropagator.php',
         'OpenTelemetry\\Context\\Propagation\\PropagationGetterInterface' => __DIR__ . '/..' . '/open-telemetry/context/Propagation/PropagationGetterInterface.php',

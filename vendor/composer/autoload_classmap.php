@@ -3500,6 +3500,7 @@ return array(
     'OpenTelemetry\\Context\\FiberBoundContextStorageExecutionAwareBC' => $vendorDir . '/open-telemetry/context/FiberBoundContextStorageExecutionAwareBC.php',
     'OpenTelemetry\\Context\\ImplicitContextKeyedInterface' => $vendorDir . '/open-telemetry/context/ImplicitContextKeyedInterface.php',
     'OpenTelemetry\\Context\\Propagation\\ArrayAccessGetterSetter' => $vendorDir . '/open-telemetry/context/Propagation/ArrayAccessGetterSetter.php',
+    'OpenTelemetry\\Context\\Propagation\\ExtendedPropagationGetterInterface' => $vendorDir . '/open-telemetry/context/Propagation/ExtendedPropagationGetterInterface.php',
     'OpenTelemetry\\Context\\Propagation\\MultiTextMapPropagator' => $vendorDir . '/open-telemetry/context/Propagation/MultiTextMapPropagator.php',
     'OpenTelemetry\\Context\\Propagation\\NoopTextMapPropagator' => $vendorDir . '/open-telemetry/context/Propagation/NoopTextMapPropagator.php',
     'OpenTelemetry\\Context\\Propagation\\PropagationGetterInterface' => $vendorDir . '/open-telemetry/context/Propagation/PropagationGetterInterface.php',
