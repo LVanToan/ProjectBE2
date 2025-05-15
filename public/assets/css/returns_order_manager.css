@@ -1,40 +1,145 @@
+/* Fixed Table Container */
 #fixed-table {
     display: none;
     position: fixed;
-    top: 50%; /* Di chuyển bảng đến giữa theo chiều dọc */
-    left: 50%; /* Di chuyển bảng đến giữa theo chiều ngang */
-    width: 40%; /* Giảm chiều rộng xuống 40% */
-    height: 40%; /* Giảm chiều cao xuống 40% */
-    background: white;
-    border: 1px solid #ccc;
-    padding: 10px; /* Giảm khoảng cách bên trong bảng */
-    overflow: auto;
-    z-index: 1000; /* Đảm bảo bảng luôn hiển thị trên cùng */
-    transform: translate(-50%, -50%); /* Căn giữa bảng theo cả hai chiều */
-}
-
-#buttons-container {
-    position: absolute;
-    bottom: 10px; /* Đặt cách đáy 10px */
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%); /* Căn giữa container của các nút */
-    display: flex;
-    gap: 20px; /* Khoảng cách giữa các nút là 20px */
+    width: 50%;
+    max-width: 600px;
+    min-width: 400px;
+    max-height: 80vh;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    overflow: hidden; /* Changed from auto to hidden */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1050;
+    transform: translate(-50%, -50%);
+    animation: fadeIn 0.3s ease-out;
+    flex-direction: column;
+    min-height: 300px;
 }
 
+/* Table Header */
+#fixed-table h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+/* Content Area */
+#order-details {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    overflow-y: auto;
+    flex-grow: 1; /* Allow content to expand */
+    min-height: 100px; /* Minimum content height */
+}
+
+/* Buttons Container */
+#buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    background: white;
+    position: sticky;
+    bottom: 0;
+    margin-top: auto; /* Push to bottom */
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+/* Buttons */
 #close-table,
 #send-btn {
-    padding: 10px 20px; /* Thêm padding để làm cho nút lớn hơn */
-    font-size: 16px; /* Tăng kích thước chữ */
-    background-color: #6c757d; /* Màu nền xám */
-    color: white; /* Màu chữ trắng */
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 500;
     border: none;
-    border-radius: 5px; /* Bo góc cho nút */
+    border-radius: 6px;
     cursor: pointer;
-    z-index: 1001; /* Đảm bảo nút nằm trên cùng */
+    transition: all 0.3s ease;
+    min-width: 120px; /* Ensure consistent button width */
 }
 
-#close-table:hover,
+#close-table {
+    background-color: #6c757d;
+    color: white;
+}
+
+#send-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Hover Effects */
+#close-table:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 #send-btn:hover {
-    background-color: #5a6268; /* Màu nền thay đổi khi hover */
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #fixed-table {
+        width: 90%;
+        min-width: unset;
+        padding: 15px;
+    }
+
+    #buttons-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #close-table,
+    #send-btn {
+        width: 100%;
+    }
+}
+
+/* Scrollbar Styling (Optional) */
+#order-details::-webkit-scrollbar {
+    width: 8px;
+}
+
+#order-details::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#order-details::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#order-details::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }

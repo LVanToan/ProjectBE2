@@ -88,7 +88,7 @@
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('dashboard') ? 'bg-gradient-primary' : '' }}"
-                        href="{{ url('dashboard') }}">
+                        href="{{ route('dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -195,6 +195,16 @@
                         <span class="nav-link-text ms-1">Oders manager</span>
                     </a>
                 </li>
+                <!-- Revenue manager -->
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin.revenue') ? 'bg-gradient-primary' : '' }}"
+                        href={{ route('admin.revenue') }}>
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">monetization_on</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Revenue manager</span>
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link text-white " href="notifications.html">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -256,7 +266,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('assets/js/addProducts.js') }}"></script>

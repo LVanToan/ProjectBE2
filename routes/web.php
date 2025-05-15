@@ -35,6 +35,7 @@ use App\Http\Controllers\ReturnsOrderManagerController;
 use App\Http\Controllers\ReturnsOrderAdminController;
 use App\Http\Controllers\ReturnsOrderDetailAdminController;
 use App\Http\Controllers\OrderReturnResultsController;
+use App\Http\Controllers\RevenueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,7 +62,8 @@ Route::middleware(['access.control'])->group(function () {
 Route::get('/', function () {
     return view('welcome');
 });
-
+// Route hiển thị trang chủ admin
+Route::get('/admin', [DashboardController::class, 'index']);
 // Hiển thị form đăng nhập/ đăng ký
 Route::get('/auth', function () {
     return view('viewUser.auth');
@@ -199,6 +201,10 @@ Route::post('/admin/blogs/{blog_id}/update', [BlogController::class, 'update'])-
 // Route::get('/admin/search', 'AdminBlogController@search')->name('admin.search');
 // Route::get('/admin/search', [AdminBlogController::class, 'search'])->name('admin.search');
 
+
+// Route trang quản lý doanh thu
+Route::get('/admin/revenue', [App\Http\Controllers\RevenueController::class, 'index'])->name('admin.revenue');
+Route::post('/admin/revenue/filter', [App\Http\Controllers\RevenueController::class, 'filter'])->name('admin.revenue.filter');
 
 
 
@@ -344,6 +350,7 @@ Route::get('/returns_order_manager', [ReturnsOrderManagerController::class, 'ind
 //Router update trạng thái đơn hàng
 Route::post('/orders/{id}/received', [OrderManagerController::class, 'markAsReceived'])->name('orders.received');
 
+
 //Router hiện thị trang quản lý đơn hàng admin
 Route::get('/admin/orders', [OrdersAdminController::class, 'index'])->name('admin.orders.index');
 Route::post('/admin/orders/{id}/confirm', [OrdersAdminController::class, 'confirmOrder'])->name('admin.orders.confirm');
@@ -389,3 +396,10 @@ Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->n
 
 
 Route::post('/ckeditor/upload', [App\Http\Controllers\CKEditorController::class, 'upload'])->name('ckeditor.upload');
+// Dùng để lưu thông tin chatbox do người dùng nhập vào 
+Route::post('/api/save-chatbox-data', [ChatboxController::class, 'saveChatboxData']);
+// Hiển thị trang chi tiết sản phẩm
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+//Route tìm kiếm product
+Route::get('/search-product', [ProductController::class, 'searchComparsion']);
+
