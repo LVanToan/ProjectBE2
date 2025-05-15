@@ -1368,7 +1368,7 @@
     <script src="{{ asset('assets/js/returns_order.js') }}"></script>
     <script src="{{ asset('assets/js/returns_order_manager.js') }}"></script>
     <script src="{{ asset('assets/js/noti.js') }}"></script>
-
+    <script src="{{ asset('assets/js/comparsion.js') }}"></script>
 
     <!-- Footer Scripts -->
     <script src="{{ asset('assets/js/theme.js') }}"></script>
