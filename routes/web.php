@@ -70,12 +70,16 @@ Route::get('/auth', function () {
 })->name('auth');
 // Đăng nhập / Đăng ký / Đăng Xuất / Quên Mật Khẩu
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login', function () {
+    return redirect()->route('auth'); // hoặc return view('viewUser.auth');
+})->name('login.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::post('password/reset', [ForgotPasswordController::class, 'reset'])->name('password.update');
 Route::get('password/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+
 
 
 // Route trang hiển thị danh sách người dùng (tables.blade.php)
