@@ -1613,28 +1613,37 @@ document.addEventListener('DOMContentLoaded', function () {
 // Thêm vào giỏ hàng
 $(document).ready(function() {
   $('#add-to-cart-btn').click(function(e) {
-      e.preventDefault(); // Ngừng hành động mặc định của form (submit)
-      
-      var form = $('#add-to-cart-form'); // Lấy form
-      var formData = form.serialize(); // Lấy dữ liệu từ form
-      console.log(formData);
-      
-      $.ajax({
-          url: form.attr('action'), // Lấy URL từ thuộc tính action của form
-          type: 'POST',
-          data: formData, // Dữ liệu cần gửi
-          success: function(response) {
-              // Nếu thêm vào giỏ hàng thành công
-              alert('Add to cart successfully!');
-          },
-          error: function(xhr, status, error) {
-            console.log(xhr.responseText); // In ra chi tiết lỗi trả về từ server
-              // Nếu có lỗi xảy ra
-              alert('An error occurred while adding the product to the cart!');
-          }
-      });
+    e.preventDefault(); // Ngăn submit mặc định
+
+    var form = $('#add-to-cart-form');
+    var formData = form.serialize();
+
+    // Lấy số lượng người dùng chọn
+    var selectedQuantity = parseInt($('input[name="quantity"]').val());
+    // Lấy số lượng còn lại từ span
+    var availableQuantity = parseInt($('#product-quantity').text());
+
+    if (selectedQuantity > availableQuantity) {
+      alert('Add failed: The quantity exceeds available stock.');
+      return; // Không gửi request
+    }
+
+    // Nếu hợp lệ thì tiếp tục gửi AJAX
+    $.ajax({
+      url: form.attr('action'),
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+        alert('Add to cart successfully!');
+      },
+      error: function(xhr, status, error) {
+        console.log(xhr.responseText);
+        alert('An error occurred while adding the product to the cart!');
+      }
+    });
   });
 });
+
 
 // Cập nhật giỏ hàng
 $(document).ready(function () {
