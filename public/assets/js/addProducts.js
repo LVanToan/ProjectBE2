@@ -177,132 +177,70 @@ const colorss = {
     2: 'do',
     3: 'xam'
 };
-// Xử lý click cho các nút màu
+
+
 colorButtons.forEach(colorButton => {
-    let clickCount = 0;
-    let singleClickTimer;
-
     colorButton.addEventListener('click', () => {
-        clickCount++;
         const colorId = colorButton.getAttribute('data-color-id');
+        const sizeContainer = document.getElementById(`${colorss[colorId]}SizeContainer`);
+        const inputGroup = document.getElementById(`group-${colorId}`);
 
-        if (clickCount === 1) {
-            // Set a timeout to handle single-click event
-            singleClickTimer = setTimeout(() => {
-                selectedColorId = colorId;
+        // Toggle active state
+        const isActive = colorButton.classList.toggle('active');
 
-                // Hide all color groups and input fields
-                document.querySelectorAll('#group-1').forEach(inputGroup => inputGroup.style.display = 'none');
-                document.querySelectorAll('#group-2').forEach(inputGroup => inputGroup.style.display = 'none');
-                document.querySelectorAll('#group-3').forEach(inputGroup => inputGroup.style.display = 'none');
+        // Hiện hoặc ẩn khối size và input tùy theo trạng thái
+        sizeContainer.style.display = isActive ? 'block' : 'none';
+        inputGroup.style.display = isActive ? 'block' : 'none';
 
-
-
-                // document.querySelectorAll('#group-3').forEach(inputGroup => inputGroup.style.display = 'none');
-                document.querySelectorAll(`#group-${selectedColorId}`).forEach(inputGroup => inputGroup.style.display = 'block');
-
-                clickCount = 0; // Reset click count
-            }, 300);
-        } else if (clickCount === 2) {
-            // Handle double-click event
-            clearTimeout(singleClickTimer);
-            document.querySelectorAll(`#group-${selectedColorId}`).forEach(inputGroup => inputGroup.style.display = 'block');
-            // Toggle active state for the color button
-            colorButton.classList.toggle('active');
-            selectedColorId = colorId;
-
-            // Update activeColors array for the selected color
-            if (colorButton.classList.contains('active')) {
-                activeColors[colorId] = Array.from(document.querySelectorAll(`.size-button[data-color-id="${colorId}"]`))
-                    .filter(sizeButton => sizeButton.classList.contains('active'))
-                    .map(sizeButton => sizeButton.getAttribute('data-size-id'));
-
-        
-
-            } else {
-                activeColors[colorId] = [];
-            document.querySelectorAll(`#group-${selectedColorId}`).forEach(inputGroup => inputGroup.style.display = 'none');
-            document.querySelectorAll(`#${colorss[colorId]}SizeContainer`).forEach(inputGroup => inputGroup.style.display = 'none');
-            
-
-            }
-
-            // Update the hidden input with active color-size combinations
-            updateHiddenInputs();
-            clickCount = 0; // Reset click count
+        // Nếu bỏ chọn màu thì xóa các size được chọn của màu đó
+        if (!isActive) {
+            activeColors[colorId] = [];
+            document.querySelectorAll(`.size-button[data-color-id="${colorId}"]`).forEach(sizeBtn => {
+                sizeBtn.classList.remove('active');
+            });
+            document.querySelectorAll(`#group-${colorId} .quantity-input`).forEach(input => {
+                input.style.display = 'none';
+            });
         }
+
+        updateHiddenInputs();
     });
 });
+
+
 
 // Handling size button clicks
+
+
 sizeButtons.forEach(sizeButton => {
-    let clickCount = 0;
-    let singleClickTimer;
-
     sizeButton.addEventListener('click', () => {
-        clickCount++;
-
         const sizeId = sizeButton.getAttribute('data-size-id');
+        const colorContainer = sizeButton.closest('[id$="SizeContainer"]');
+        const colorKey = Object.keys(colorss).find(key => `${colorss[key]}SizeContainer` === colorContainer.id);
+        const key = `${colorKey}-${sizeId}`;
+        const inputGroup = document.getElementById(`input-${key}`);
 
-        if (clickCount === 1) {
-            // Set a timeout to handle single-click event
-            singleClickTimer = setTimeout(() => {
-                if (selectedColorId) { // Ensure a color is selected
-                    activeSizeId = sizeId;
+        const isActive = sizeButton.classList.toggle('active');
 
-                    // Hide all input groups
-                    document.querySelectorAll(`#group-${selectedColorId}`).forEach(inputGroup => inputGroup.style.display = 'block');
-
-                    // Show the input group corresponding to the selected color and size
-                    const key = `${selectedColorId}-${activeSizeId}`;
-                    const inputGroup = document.getElementById(`input-${key}`);
-                   
-                    inputGroup.style.display = 'block';
-                    
-                }
-                clickCount = 0; // Reset click count
-            }, 300);
-        } else if (clickCount === 2) {
-            // Handle double-click event
-            clearTimeout(singleClickTimer);
-            document.querySelectorAll(`#group-${selectedColorId}`).forEach(inputGroup => inputGroup.style.display = 'block');
-            // Toggle active state for the size button
-            sizeButton.classList.toggle('active');
-            activeSizeId = sizeId;
-
-            const key = `${selectedColorId}-${activeSizeId}`;
-            const inputGroup = document.getElementById(`input-${key}`);
-
-            if (inputGroup) {
-                inputGroup.style.display = 'block';
+        if (isActive) {
+            inputGroup.style.display = 'block';
+            if (!activeColors[colorKey]) {
+                activeColors[colorKey] = [];
             }
-
-            const colorId = selectedColorId;
-            if (sizeButton.classList.contains('active')) {
-                // Ensure the size is stored under the correct color
-                if (!activeColors[colorId]) {
-                    activeColors[colorId] = [];
-                }
-                activeColors[colorId].push(sizeId);
-                
-            } else {
-                // Remove the size from the active list
-               
-                    const inputGroup = document.getElementById(`input-${key}`);
-                    inputGroup.style.display = 'none';
-                    activeColors[colorId] = Array.from(document.querySelectorAll(`.size-button[data-color-id="${colorId}"]`))
-                    .filter(sizeButton => sizeButton.classList.contains('active'))
-                    .map(sizeButton => sizeButton.getAttribute('data-size-id'));
-                
+            if (!activeColors[colorKey].includes(sizeId)) {
+                activeColors[colorKey].push(sizeId);
             }
-
-            // Update the hidden input with active color-size combinations
-            updateHiddenInputs();
-
-            clickCount = 0; // Reset click count
+        } else {
+            inputGroup.style.display = 'none';
+            if (activeColors[colorKey]) {
+                activeColors[colorKey] = activeColors[colorKey].filter(id => id !== sizeId);
+            }
         }
+
+        updateHiddenInputs();
     });
 });
+
 
 
 

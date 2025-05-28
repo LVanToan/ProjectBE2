@@ -301,7 +301,7 @@
                 <a href="{{ route('products.showListProducts') }}" class="btn btn-outline-secondary btn-custom-size">
                     Quay Lại
                 </a>
-                <button type="submit" class="btn btn-primary btn-custom-size">Cập Nhật</button>
+                <button  type="submit" class="btn btn-primary btn-custom-size">Cập Nhật</button>
             </div>
         </div>
     </form>

@@ -401,12 +401,13 @@ class ProductsController extends Controller
             return response()->json(['success' => 'Sản phẩm và các hình ảnh liên quan đã được xóa thành công.']);
         } catch (\Exception $e) {
             // Rollback transaction nếu có lỗi xảy ra
-            DB::rollBack();
-
-            // Ghi log lỗi
-            Log::error('Error deleting product ID: ' . $id . ' - ' . $e->getMessage());
-
-            return response()->json(['error' => 'Chỉ amdin có quyền xóa.'], 500);
+             DB::rollBack();
+    Log::error('Error deleting product: ' . $e->getMessage());
+    
+    return response()->json([
+        'error' => 'Xóa sản phẩm thất bại',
+        'debug' => $e->getMessage() // Chỉ để debug, không dùng production
+    ], 500);
         }
     }
 
@@ -571,6 +572,6 @@ class ProductsController extends Controller
             }
         }
 
-        return redirect()->route('products.edit', $id)->with('success', 'Cập nhật sản phẩm thành công!');
+        return redirect()->route('products.showListProducts')->with('success', 'Cập nhật sản phẩm thành công!');
     }
 }
