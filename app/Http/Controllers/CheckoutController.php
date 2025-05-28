@@ -47,23 +47,38 @@ class CheckoutController extends Controller
         }, 0);
         
 
-        // Lấy danh sách voucher
-        $vouchers = Voucher::where('is_global', true)
-        ->orWhere('user_id', $user_id)
-        ->get();
+        // Lấy danh sách voucher để hiển thị
+$vouchers = Voucher::where('is_global', true)
+    ->orWhere('user_id', $user_id)
+    ->get();
 
-        // Lấy danh sách phương thức vận chuyển
-        $shippingprice = ShippingPrice::all();
+// Nếu có voucher_id trong request, kiểm tra voucher đó có hợp lệ không
+if ($request->voucher_id) {
+    $voucher = Voucher::where('id', $request->voucher_id)
+        ->where(function($query) use ($user_id) {
+            $query->where('is_global', true)
+                  ->orWhere('user_id', $user_id);
+        })
+        ->first();
 
-        // Lấy danh sách tài khoản ngân hàng
-        $bankAccounts = BankAccount::where('user_id', $user_id)->get();
-        
-        return view('viewUser.checkout', [
-            'cart' => $cart,
-            'total' => $total,
-            'vouchers' => $vouchers,
-            'shippingprice' => $shippingprice,
-            'bankAccounts' => $bankAccounts
-        ]);
+    if (!$voucher) {
+        return redirect()->back()->with('error', 'Voucher không hợp lệ hoặc không tồn tại.');
+    }
+}
+
+// Lấy danh sách phương thức vận chuyển
+$shippingprice = ShippingPrice::all();
+
+// Lấy danh sách tài khoản ngân hàng
+$bankAccounts = BankAccount::where('user_id', $user_id)->get();
+
+return view('viewUser.checkout', [
+    'cart' => $cart,
+    'total' => $total,
+    'vouchers' => $vouchers,       // danh sách voucher để view dùng
+    'shippingprice' => $shippingprice,
+    'bankAccounts' => $bankAccounts
+]);
+
     }
 }

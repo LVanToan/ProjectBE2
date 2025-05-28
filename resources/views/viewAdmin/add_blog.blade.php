@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-           
+
             <button type="button" class="btn btn-danger" onclick="window.history.back();">Hủy</button>
             <div class="form-footer">
                 <button type="submit" class="btn btn-success">Thêm Blog</button>
@@ -102,20 +102,24 @@
         document.getElementById('blog-form').onsubmit = async function(event) {
             event.preventDefault();
 
+            // Disable nút submit để tránh submit nhiều lần
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.innerText = 'Đang xử lý...';
+
             let contentHtml = quill.root.innerHTML;
             const formData = new FormData();
 
-            // Tìm ảnh base64 trong nội dung và tải lên server
             const images = contentHtml.match(/<img src="data:image\/[^;]+;base64[^"]+"/g);
             if (images) {
                 for (let i = 0; i < images.length; i++) {
                     const base64String = images[i].match(/src="([^"]+)"/)[1];
 
-                    // Gửi ảnh lên server để lưu trữ
                     const response = await fetch('{{ route("upload.image") }}', {
                         method: 'POST',
                         headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
                             image: base64String
@@ -124,13 +128,11 @@
 
                     const data = await response.json();
                     if (data.url) {
-                        // Thay thế mã base64 bằng URL ảnh trên server
                         contentHtml = contentHtml.replace(base64String, data.url);
                     }
                 }
             }
 
-            // Thêm nội dung đã cập nhật vào form và gửi
             const contentInput = document.createElement('input');
             contentInput.setAttribute('type', 'hidden');
             contentInput.setAttribute('name', 'content');
@@ -139,17 +141,17 @@
 
             this.submit();
         }
+
         document.getElementById('title').addEventListener('input', function() {
-    const titleInput = document.getElementById('title');
-    const errorMessage = document.getElementById('title-error');
+            const titleInput = document.getElementById('title');
+            const errorMessage = document.getElementById('title-error');
 
-    if (titleInput.value.length > 100) {
-        errorMessage.style.display = 'block'; // Hiển thị thông báo lỗi
-    } else {
-        errorMessage.style.display = 'none'; // Ẩn thông báo lỗi nếu hợp lệ
-    }
-});
-
+            if (titleInput.value.length > 100) {
+                errorMessage.style.display = 'block'; // Hiển thị thông báo lỗi
+            } else {
+                errorMessage.style.display = 'none'; // Ẩn thông báo lỗi nếu hợp lệ
+            }
+        });
     </script>
 
 
