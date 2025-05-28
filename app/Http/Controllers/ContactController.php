@@ -60,10 +60,15 @@ class ContactController extends Controller
 
     public function destroy($id)
     {
-        // Tìm và xóa tin nhắn theo id
-        ContactMessage::findOrFail($id)->delete();
+        $contact = ContactMessage::find($id);
+        if ($contact) {
+             // Tìm và xóa tin nhắn theo id
+            ContactMessage::findOrFail($id)->delete();
 
-        // Chuyển hướng lại trang contact admin với thông báo thành công
-        return redirect()->route('contact.index')->with('success', 'Tin nhắn đã được xóa thành công!');
-    }
+            // Chuyển hướng lại trang contact admin với thông báo thành công
+            return redirect()->route('contact.index')->with('success', 'Tin nhắn đã được xóa thành công!');
+        }
+        return redirect()->back()->with('error', 'Không tìm thấy người dùng!');
+       
+    }   
 }
