@@ -53,31 +53,31 @@ class ReviewController extends Controller
     }
 
     public function store(Request $request, $review_id)
-{
-    $request->validate([
-        'reply' => [
-            'required',
-            'string',
-            'min:1',
-            'max:255',
-            'regex:/^[\p{L}\p{N}\s]+$/u', // Chỉ cho phép chữ, số và khoảng trắng
-            'not_regex:/\s{2,}/',         // Không cho phép khoảng trắng liên tiếp
-        ]
-    ]);
+    {
+        $request->validate([
+            'reply' => [
+                'required',
+                'string',
+                'min:1',
+                'max:255',
+                'regex:/^[\p{L}\p{N}\s]+$/u', // Chỉ cho phép chữ, số và khoảng trắng
+                'not_regex:/\s{2,}/',         // Không cho phép khoảng trắng liên tiếp
+            ]
+        ]);
 
-    // Tìm review theo id
-    $review = Review::findOrFail($review_id);
+        // Tìm review theo id
+        $review = Review::findOrFail($review_id);
 
-    // Cập nhật hoặc thêm mới reply
-    $review->reply = $request->reply;
-    $review->save();
+        // Cập nhật hoặc thêm mới reply
+        $review->reply = $request->reply;
+        $review->save();
 
-    // Thêm flash message
-    $message = $review->wasChanged('reply') ? "Reply added successfully!" : "Reply updated successfully!";
-    $request->session()->flash('add-reply-success', $message);
+        // Thêm flash message
+        $message = $review->wasChanged('reply') ? "Reply added successfully!" : "Reply updated successfully!";
+        $request->session()->flash('add-reply-success', $message);
 
-    return back();
-}
+        return back();
+    }
 
     
     public function destroyByUser(Request $request, $id)

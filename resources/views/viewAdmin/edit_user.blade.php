@@ -25,7 +25,7 @@
         <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            
+            <input type="hidden" name="version" value="{{ $user->version }}">
             <div class="form-group">
                 <label for="username">Tên đăng nhập</label>
                 <input id="username" name="name" type="text" value="{{ old('name', $user->name) }}" />
@@ -71,13 +71,22 @@
             </div>
 
             <div class="profile-pic">
-                <img id="profileImage" alt="ảnh" src="{{ $user->profile_image ? asset($user->profile_image) : 'https://storage.googleapis.com/a1aa/image/JvrL8IccnN7JEFHYrd8lG4Pkxxr1MJyu5roHmDKfPBx2sy1JA.jpg' }}" />
+                <!-- <img id="profileImage" alt="ảnh" src="{{ $user->profile_image ? asset($user->profile_image) : 'https://storage.googleapis.com/a1aa/image/JvrL8IccnN7JEFHYrd8lG4Pkxxr1MJyu5roHmDKfPBx2sy1JA.jpg' }}" /> -->
+                 <img id="profileImage" alt="ảnh" src="{{ asset($user->profile_image ?? 'uploads/default_avatar.png') }}" />
                 <input id="uploadImage" name="profile_image" type="file" accept="image/*" onchange="previewImage(event)" style="display: none;" />
                 <label for="uploadImage" class="upload-button">Chọn ảnh</label>
                 <div class="file-info">Dung lượng file tối đa 1 MB<br />Định dạng: JPEG, PNG</div>
                 @if ($errors->has('profile_image'))
                     <div class="text-danger">{{ $errors->first('profile_image') }}</div>
                 @endif
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" name="delete_image" id="deleteImageCheckbox">
+                    <label class="form-check-label" for="deleteImageCheckbox">
+                        Xóa ảnh đại diện hiện tại
+                    </label>
+                </div>
+
             </div>
 
             <div class="buttons">

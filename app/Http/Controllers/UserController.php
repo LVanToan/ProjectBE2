@@ -167,52 +167,68 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+   public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|regex:/@gmail\.com$/|unique:users,email,' . $id,
-            'phone' => 'nullable|numeric|digits:10', // Cho phép phone là null
+            'phone' => 'nullable|numeric|digits:10',
             'gender' => 'required|in:male,female,other',
-            'dob' => 'nullable|date', // Cho phép dob là null
+            'dob' => 'nullable|date',
             'profile_image' => 'nullable|image|mimes:jpeg,png|max:1024',
+            'version' => 'required|integer', // validate version luôn
         ]);
 
         $user = User::findOrFail($id);
 
-        // Cập nhật thông tin người dùng bao gồm cả các trường trống trước đó
-        $user->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone') ?: $user->phone, // Giữ giá trị cũ nếu không có input
-            'gender' => $request->input('gender'),
-            'dob' => $request->input('dob') ?: $user->dob, // Giữ giá trị cũ nếu không có input
-        ]);
+        // ⚠ Kiểm tra version để tránh xung đột dữ liệu
+        if ((int)$request->input('version') !== $user->version) {
+            return redirect()->back()->with('error', 'Dữ liệu đã bị thay đổi bởi người khác. Vui lòng tải lại trang và thử lại.');
+        }
 
-        // Kiểm tra và lưu ảnh nếu có file ảnh tải lên
+        // Cập nhật thông tin
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone') ?: $user->phone;
+        $user->gender = $request->input('gender');
+        $user->dob = $request->input('dob') ?: $user->dob;
+
+        // ⚠ Tăng version để xác nhận đã cập nhật
+        $user->version += 1;
+        // Nếu chọn xóa ảnh
+            if ($request->has('delete_image') && $user->profile_image) {
+                $imagePath = public_path($user->profile_image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); // Xóa file thật sự
+                }
+
+                // Cập nhật đường dẫn ảnh mặc định
+                $user->profile_image = 'uploads/default_avatar.png';
+            }
+
+
+        // Kiểm tra và xử lý ảnh nếu có
         if ($request->hasFile('profile_image')) {
-            // Nếu người dùng đã có ảnh trước đó, xóa ảnh cũ
             if ($user->profile_image) {
                 Storage::delete($user->profile_image);
             }
 
-            // Đường dẫn thư mục lưu ảnh
             $directoryPath = public_path('uploads');
 
-            // Tạo thư mục nếu chưa tồn tại
             if (!file_exists($directoryPath)) {
                 mkdir($directoryPath, 0755, true);
             }
 
-            // Lưu ảnh mới
             $profileImageName = $request->file('profile_image')->getClientOriginalName();
             $request->file('profile_image')->move($directoryPath, $profileImageName);
 
-            // Cập nhật đường dẫn ảnh vào cơ sở dữ liệu
             $profileImagePath = 'uploads/' . $profileImageName;
-            $user->update(['profile_image' => $profileImagePath]);
+            $user->profile_image = $profileImagePath;
         }
+
+        $user->save();
 
         return redirect()->route('tables')->with('success', 'Cập nhật thành công!');
     }
+
 }

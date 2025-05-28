@@ -9,6 +9,11 @@
   {{ session('success') }}
 </div>
 @endif
+@if(session('error'))
+<div id="error-message" class="alert alert-danger">
+  {{ session('error') }}
+</div>
+@endif
 
 
 <head>
@@ -170,7 +175,16 @@
       successMessage.style.display = 'none';
     }
   }, 3000); // 3000 milliseconds = 3 giây
-
+  setTimeout(function () {
+    var successMessage = document.getElementById('success-message');
+    var errorMessage = document.getElementById('error-message');
+    if (successMessage) {
+      successMessage.style.display = 'none';
+    }
+    if (errorMessage) {
+      errorMessage.style.display = 'none';
+    }
+  }, 3000);
   var exampleModal = document.getElementById('exampleModal')
   exampleModal.addEventListener('show.bs.modal', function (event) {
     // Nút đã kích hoạt modal
