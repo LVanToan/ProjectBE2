@@ -16,6 +16,7 @@
 
     <form id="blog-form" action="{{ route('admin.blog.update', $blog->blog_id) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="original_updated_at" value="{{ $blog->updated_at }}">
         <div class="form-group">
             <div class="form-left">
                 <label for="title">Tên Blog</label>

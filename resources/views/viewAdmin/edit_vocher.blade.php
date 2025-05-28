@@ -90,11 +90,21 @@
                     <small id="date-error" class="text-danger" style="display: none;">Ngày kết thúc phải sau ngày bắt đầu.</small>
                 </div>
 
-                <div class="buttons">
+                <form method="POST" action="...">
+                    @csrf
+                    @method('PUT')
 
-                    <button type="button" class="btn btn-danger" onclick="window.history.back();">Hủy</button>
-                    <button type="submit" class="btn btn-primary w-100">Cập Nhật Voucher</button>
-                </div>
+                    <!-- Các input khác như name, description,... -->
+
+                    <!-- Thêm input ẩn updated_at -->
+                    <input type="hidden" name="updated_at" value="{{ $vocher->updated_at }}">
+
+                    <div class="buttons">
+                        <button type="button" class="btn btn-danger" onclick="window.history.back();">Hủy</button>
+                        <button type="submit" class="btn btn-primary w-100">Cập Nhật Voucher</button>
+                    </div>
+                </form>
+
             </form>
         </div>
     </div>

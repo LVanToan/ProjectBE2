@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Carbon;
+
 
 class VocherController extends Controller
 {
@@ -75,12 +77,21 @@ class VocherController extends Controller
     }
 
     public function destroy($id)
-    {
+{
+    try {
+        // Tìm voucher theo ID
         $vocher = Voucher::findOrFail($id);
+
+        // Thực hiện xóa
         $vocher->delete();
 
         return redirect()->route('vocher.index')->with('success', 'Voucher đã được xóa thành công!');
+    } catch (\Exception $e) {
+        // Nếu có lỗi xảy ra (VD: không tìm thấy hoặc lỗi database)
+        return redirect()->route('vocher.index')->with('error', 'Xóa không thành công. Vui lòng tải lại trang và thử lại.');
     }
+}
+
 
 
     // public function edit($id)
@@ -109,58 +120,44 @@ class VocherController extends Controller
 
 
 
-    // public function update(Request $request, $id)
-    // {
-    //     $vocher = Voucher::findOrFail($id);
 
-    //     $vocher->name = $request->name;
-    //     $vocher->description = $request->description;
-    //     $vocher->discount = $request->discount;
-    //     $vocher->start_date = $request->start_date;
-    //     $vocher->end_date = $request->end_date;
+public function update(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:100',
+        'description' => 'nullable|string|max:255',
+        'discount' => 'required|integer|min:1|max:100',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after:start_date',
+        'apply_to' => 'required|in:all,specific',
+        'user_id' => 'nullable|integer|min:1|exists:users,id',
+        'updated_at' => 'required|date',
+    ]);
 
-    //     if ($request->apply_to == 'all') {
-    //         $vocher->is_global = true;
-    //         $vocher->user_id = null;
-    //     } else {
-    //         $vocher->is_global = false;
-    //         $vocher->user_id = $request->user_id;
-    //     }
+    $vocher = Voucher::findOrFail($id);
 
-    //     $vocher->save();
-
-    //     return redirect()->route('vocher.index')->with('success', 'Voucher đã được cập nhật thành công!');
-    // }
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:100',
-            'description' => 'nullable|string|max:255',
-            'discount' => 'required|integer|min:1|max:100',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'apply_to' => 'required|in:all,specific',
-            'user_id' => 'nullable|integer|min:1|exists:users,id',
-        ]);
-
-        $vocher = Voucher::findOrFail($id);
-
-        $vocher->name = $validatedData['name'];
-        $vocher->description = $validatedData['description'];
-        $vocher->discount = $validatedData['discount'];
-        $vocher->start_date = $validatedData['start_date'];
-        $vocher->end_date = $validatedData['end_date'];
-
-        if ($validatedData['apply_to'] == 'all') {
-            $vocher->is_global = true;
-            $vocher->user_id = null;
-        } else {
-            $vocher->is_global = false;
-            $vocher->user_id = $validatedData['user_id'];
-        }
-
-        $vocher->save();
-
-        return redirect()->route('vocher.index')->with('success', 'Voucher đã được cập nhật thành công!');
+    // So sánh thời gian updated_at
+    if ($vocher->updated_at->ne(Carbon::parse($validatedData['updated_at']))) {
+        return redirect()->back()->withErrors(['error' => 'Dữ liệu đã bị thay đổi bởi người khác. Vui lòng tải lại trang.']);
     }
+
+    $vocher->name = $validatedData['name'];
+    $vocher->description = $validatedData['description'];
+    $vocher->discount = $validatedData['discount'];
+    $vocher->start_date = $validatedData['start_date'];
+    $vocher->end_date = $validatedData['end_date'];
+
+    if ($validatedData['apply_to'] == 'all') {
+        $vocher->is_global = true;
+        $vocher->user_id = null;
+    } else {
+        $vocher->is_global = false;
+        $vocher->user_id = $validatedData['user_id'];
+    }
+
+    $vocher->save();
+
+    return redirect()->route('vocher.index')->with('success', 'Voucher đã được cập nhật thành công!');
+}
+
 }

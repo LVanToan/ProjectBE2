@@ -8,6 +8,8 @@ use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Pagination\Paginator;
+
 
 
 class BlogController extends Controller
@@ -41,19 +43,45 @@ class BlogController extends Controller
 
     // Admin blog index
     public function adminIndex(Request $request)
-    {
-        $query = Blog::query();
-        $queryText = $request->input('query');
+{
+    $query = Blog::query();
+    $queryText = $request->input('query');
 
-        if ($queryText) {
-            $query->whereRaw("MATCH(title) AGAINST(? IN NATURAL LANGUAGE MODE)", [$queryText])
-                  ->orWhere('blog_id', $queryText);
-        }
-
-        $blogs = $query->orderBy('created_at', 'desc')->paginate(6);
-
-        return view('viewAdmin.blogs_admin', compact('blogs'));
+    if ($queryText) {
+        $query->whereRaw("MATCH(title) AGAINST(? IN NATURAL LANGUAGE MODE)", [$queryText])
+              ->orWhere('blog_id', $queryText);
     }
+
+    $perPage = 6;
+    $total = $query->count();
+
+    $page = $request->query('page', 1);
+
+    // Kiểm tra tính hợp lệ của page
+    if (!is_numeric($page) || (int)$page < 1) {
+        return redirect()->route('admin.blog.index')
+                         ->with('error', 'Trang không hợp lệ. Đã chuyển về trang đầu.');
+    }
+
+    $page = (int)$page;
+    $maxPage = (int) ceil($total / $perPage);
+
+    if ($page > $maxPage && $total > 0) {
+        return redirect()->route('admin.blog.index')
+                         ->with('error', 'Trang không tồn tại. Đã chuyển về trang đầu.');
+    }
+
+    Paginator::currentPageResolver(function () use ($page) {
+        return $page;
+    });
+
+    $blogs = $query->orderBy('created_at', 'desc')->paginate($perPage);
+
+    return view('viewAdmin.blogs_admin', compact('blogs'));
+}
+
+
+
 
     // thêm sql
     public function store(Request $request)
@@ -108,14 +136,27 @@ class BlogController extends Controller
 
 
     public function destroy($blog_id)
-    {
-        // Tìm blog theo blog_id và xóa nó
-        $blog = Blog::where('blog_id', $blog_id)->firstOrFail();
+{
+    try {
+        // Tìm blog theo blog_id
+        $blog = Blog::where('blog_id', $blog_id)->first();
+
+        if (!$blog) {
+            // Nếu không tìm thấy blog
+            return redirect()->route('admin.blog.index')->with('error', 'Xóa không hợp lệ, vui lòng load lại trang.');
+        }
+
+        // Thực hiện xóa blog
         $blog->delete();
 
-        // Chuyển hướng với thông báo thành công
+        // Nếu xóa thành công
         return redirect()->route('admin.blog.index')->with('success', 'Blog đã được xóa thành công!');
+    } catch (\Exception $e) {
+        // Nếu có lỗi xảy ra trong quá trình xóa
+        return redirect()->route('admin.blog.index')->with('error', 'Xóa không hợp lệ, vui lòng load lại trang.');
     }
+}
+
 
     // public function edit($blog_id)
     // {
@@ -151,33 +192,40 @@ class BlogController extends Controller
 
 
     public function update(Request $request, $blog_id)
-    {
-        // Validate dữ liệu
-        $request->validate([
-            'title' => 'required|string|max:100',
-            'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
-        ]);
+{
+    // Validate dữ liệu
+    $request->validate([
+        'title' => 'required|string|max:100',
+        'content' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
+        'original_updated_at' => 'required',  // Bắt buộc có trường này từ form
+    ]);
 
-        // Tìm blog để cập nhật
-        $blog = Blog::where('blog_id', $blog_id)->firstOrFail();
+    // Tìm blog để cập nhật
+    $blog = Blog::where('blog_id', $blog_id)->firstOrFail();
 
-        // Xử lý upload ảnh nếu có
-        if ($request->hasFile('image')) {
-            $imageName = time() . '-' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('uploads'), $imageName);
-            $path = 'uploads/' . $imageName;
-            $blog->image_url = $path;
-        }
-
-        // Cập nhật các thông tin khác
-        $blog->title = $request->input('title');
-        $blog->content = $request->input('content');
-        $blog->save();
-
-        // Chuyển hướng về trang danh sách blog với thông báo thành công
-        return redirect()->route('admin.blog.index')->with('success', 'Blog đã được cập nhật thành công!');
+    // So sánh updated_at để kiểm tra dữ liệu có bị thay đổi từ tab khác không
+    if ($request->input('original_updated_at') != $blog->updated_at->toDateTimeString()) {
+        return redirect()->route('admin.blog.index')->with('error', 'Dữ liệu đã bị thay đổi, vui lòng thử lại.');
     }
+
+    // Xử lý upload ảnh nếu có
+    if ($request->hasFile('image')) {
+        $imageName = time() . '-' . $request->file('image')->getClientOriginalName();
+        $request->file('image')->move(public_path('uploads'), $imageName);
+        $path = 'uploads/' . $imageName;
+        $blog->image_url = $path;
+    }
+
+    // Cập nhật các thông tin khác
+    $blog->title = $request->input('title');
+    $blog->content = $request->input('content');
+    $blog->save();
+
+    // Chuyển hướng về trang danh sách blog với thông báo thành công
+    return redirect()->route('admin.blog.index')->with('success', 'Blog đã được cập nhật thành công!');
+}
+
 
 
 

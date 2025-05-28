@@ -191,6 +191,19 @@ Route::get('/add_blog', function () {
 // Admin routes
 Route::get('/blogs_admin', [BlogController::class, 'adminIndex'])->name('admin.blog.index');
 Route::delete('/blogs/{blog_id}', [BlogController::class, 'destroy'])->name('admin.blog.destroy');
+Route::get('/admin/blog/delete-test/{id}', function ($id) {
+    $blog = \App\Models\Blog::where('blog_id', $id)->first();
+
+    if (!$blog) {
+        return redirect()->route('admin.blog.index')->with('error', 'Không tìm thấy blog');
+    }
+
+    $blog->delete();
+    return redirect()->route('admin.blog.index')->with('success', 'Đã xóa blog thành công');
+});
+
+
+
 Route::post('/upload-image', [BlogController::class, 'uploadImage'])->name('upload.image');
 
 // Route cho trang chỉnh sửa blog
@@ -199,7 +212,7 @@ Route::get('/admin/blogs/{blog_id}/edit', [BlogController::class, 'edit'])->name
 // Route để cập nhật blog sau khi chỉnh sửa
 Route::post('/admin/blogs/{blog_id}/update', [BlogController::class, 'update'])->name('admin.blog.update');
 
-// Route tìm kiếm blogs
+
 
 
 // Route::get('/admin/search', 'AdminBlogController@search')->name('admin.search');
@@ -391,7 +404,7 @@ Route::get('/about-us', function () {
 })->name('about-us.show');
 
 Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle']);
-Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+//Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
 //Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
